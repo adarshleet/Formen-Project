@@ -153,7 +153,6 @@ exports.paymentDone = async (req,res) =>{
                 path: 'category'
               }
             });
-            console.log(cartForCost.product[0].product_id.category.category);
 
             if(method.payment === 'cash'){
                 let orderArray=[]
@@ -192,7 +191,6 @@ exports.paymentDone = async (req,res) =>{
                 //reducing the stock
                 let product='',count=0
                 for(let i=0;i<cart.product.length;i++){
-                    console.log((cart.product[i].product_id).toString())
                     product = ((cart.product[i].product_id).toString())
                     count = cart.product[i].count
                     await Product.findByIdAndUpdate({_id:product},{$inc:{stock:-count}})
@@ -291,7 +289,6 @@ exports.paymentDone = async (req,res) =>{
                 //reducing the stock
                 let product='',count=0
                 for(let i=0;i<cart.product.length;i++){
-                    console.log((cart.product[i].product_id).toString())
                     product = ((cart.product[i].product_id).toString())
                     count = cart.product[i].count
                     await Product.findByIdAndUpdate({_id:product},{$inc:{stock:-count}})
@@ -349,7 +346,6 @@ exports.verifyPayment = async (req,res) =>{
             const cart = await Cart.findOne({user:user_id});
             let product='',count=0
             for(let i=0;i<cart.product.length;i++){
-                console.log((cart.product[i].product_id).toString())
                 product = ((cart.product[i].product_id).toString())
                 count = cart.product[i].count
                 await Product.findByIdAndUpdate({_id:product},{$inc:{stock:-count}})
@@ -397,7 +393,6 @@ exports.cancelOrder = async(req,res) =>{
             { 'orders.$': 1 }
           ).populate('orders.product')
         
-        console.log(order.orders[0].product.name);
         
         await Order.findOneAndUpdate({
             user: user_id,

@@ -67,7 +67,15 @@ exports.signup = async (req,res) =>{
         
     } 
     catch (error) {
-       console.log(error.message);
+        if (error instanceof Twilio.RestClient.RestException) {
+            console.error("Twilio API Error:");
+            console.error("Status:", error.status);
+            console.error("Code:", error.code);
+            console.error("More Info:", error.moreInfo);
+            console.error("Details:", error.details);
+          } else {
+            console.error("An unexpected error occurred:", error);
+          }
     }
 }
 
@@ -447,7 +455,6 @@ exports.changePassword = async (req,res) =>{
         const user = await User.findById(user_id)
 
         const {currentPassword,password,confirmPassword} = req.body
-        console.log(password,confirmPassword);
         
         if(currentPassword == '' || password =='' || confirmPassword == ''){
             return res.json({status:'empty'})
@@ -705,7 +712,6 @@ exports.passwordReset = async (req,res) =>{
         else{
             const hashedPassword = await bcrypt.hash(password,10);
             const user = await User.findOneAndUpdate({mobile},{$set:{password:hashedPassword}})
-            console.log(user);
             req.app.locals.specialContext = 'passwords Changed Succesfully';
             res.redirect(`/login`);
         }

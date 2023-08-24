@@ -205,7 +205,6 @@ exports.addProduct = async (req,res) =>{
         }
         else{
             if(!categoryCheck){
-            // console.log('invalid category');
             req.app.locals.specialContext = 'Invalid details';
         }
         const brandCheck = await Category.findOne({ _id: category, brand: { $in: [brand] } });

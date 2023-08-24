@@ -13,17 +13,18 @@ exports.cart = async(req,res,next) => {
 
         //cart finding for total calculation
         const getCart = await Cart.findOne({user}).populate('product.product_id');
-        const cart = getCart.product
+        const cart = getCart?.product || []
         let totalMRP = 0,discount = 0,totalAmound = 0,couponDiscount=0,couponSelected
         totalMRP += cart.map(item => item.product_id.actualPrice*item.count).reduce((accumulator, currentValue)=>accumulator + currentValue, 0);
         totalAmound += cart.map(item => item.product_id.sellingPrice*item.count).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         discount = totalAmound - totalMRP;
+        
 
         //checking coupons that are not used
         const couponsToDisplay = await Coupon.find({ usedUsers: { $nin: [user] } })
 
         //checking coupon is applied
-        const couponFound = await Coupon.findOne({couponName:getCart.couponApplied})
+        const couponFound = await Coupon.findOne({couponName:getCart?.couponApplied})
         if(couponFound && totalAmound > couponFound.minimumPurchase){
             totalAmound = totalAmound - couponFound.maximumDiscount;
             couponDiscount = couponFound.maximumDiscount;

@@ -10,10 +10,11 @@
             <div class="row container-fluid p-0 pe-2">
                 <div class="d-flex ms-4">
                     <h5 class="fw-bold me-2">My Wishlist </h5>
-                    <h5> <%= wishlist.product.length %> items</h5>
+                    <h5><%if(wishlist.product != undefined){%><%= wishlist.product.length %><%}else{%> 0 <%} %>items</h5>
                 </div>
                 <div class="col-md-12 mt-3">
                     <div class="row">
+                        <% if(wishlist.product != undefined){%>
                         <% wishlist?.product.forEach(item =>{  %>
                             <div class="col-6 col-md-4 col-lg-3  ">
                                 <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
@@ -35,6 +36,7 @@
                                 </div>
                             </div>
                         <% }) %>
+                        <%} %>
                     </div>
                 </div>
             </div>

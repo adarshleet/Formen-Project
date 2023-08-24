@@ -17,13 +17,14 @@ exports.wishlist = async (req,res,next) =>{
         
 
         const category = await Category.find()
-        const wishlist = await Wishlist.findOne({user:user_id}).populate({
+        let wishlist = await Wishlist.findOne({user:user_id}).populate({
             path: 'product.product_id',
             model: 'Product', // Replace with the actual model name for Product
             populate: {
               path: 'category', // Path to the category reference inside the Product schema
               model: 'Category', // Replace with the actual model name for Category
             }})
+            wishlist = wishlist || []
         res.render('user/wishlist',{wishlist,category,cartItems,title:'Wishlist'})
     } catch (error) {
         next(error)
