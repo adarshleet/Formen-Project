@@ -1,0 +1,33 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/dash.css">
+</head>
+<body>
+    <section class="row justify-content-center align-items-center mx-4 vh-100">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="row justify-content-center col-sm-6 text-center text-black">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form class="main-form form-control p-0" action="/admin" method="post" style="width: 21rem;">
+                            <div class="login-banner mb-4">
+                                <img class="img-fluid" src="/images/FORMEN_LOGO.png" alt="">
+                            </div>
+                            <h3 class="login-title text-center">Admin Login</h3>
+                            <h6 class="text-center text-danger"><%=locals.context?context:'' %></h6>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="text" name="email" placeholder="Email" class="form-control login-input">
+                                <div id="mobileError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="password" id="passwordInput" name="password" placeholder="Password" class="form-control login-input">
+                            </div>
+                            <div class="d-grid gap-2 mx-3 my-4">
+                                <button class="btn login-btn mt-2" type="submit">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/javascript/Validate.js"></script>
+  <%- include('./foot.ejs') %>

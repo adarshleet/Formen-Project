@@ -1,0 +1,88 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/popUp.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./headerForPayment.ejs') %>
+    <main class="mx-3 mt-4">
+        <% if(totalAmound === 0){%>
+            <div class="text-center mt-5">
+                <h4 class="mb-4">There is nothing in your bag. lets add some items</h4>
+                <a href="" class="btn btn-primary">ADD FROM YOUR WISHLIST</a>
+            </div>
+        <%}else{%>
+        <form class="row" method="post" action="/addressSelection">
+            <div class="col-md-7 d-flex flex-column align-items-end border-end">
+                <div class="d-flex justify-content-between mb-3 img-fluid" style="width: 40rem;">
+                    <h5>Select delivery address</h5>
+                    <a href="/addNewAddress" class="btn border border-secondary btn-sm fw-bold">ADD NEW ADDRESS</a>
+                </div>
+                <% if(address == undefined){%>
+                    <div class="text-center mt-5" style="width: 40rem;">
+                        <h5>Please add an address</h5>
+                    </div>
+                <%}else{ address.address.forEach(item =>{%>
+                    <div class="p-3 mb-3 d-flex border img-fluid" style="width: 40rem;height: 14rem; box-shadow:4px 4px 7px 3px rgba(0, 0, 0, 0.1);">
+                        <div>
+                            <input type="radio" <%if(address.address.indexOf(item) == 0){%> checked <%}%> value="<%= item._id %>" name="address">
+                        </div>
+                        <div class="ms-3">
+                            <h5><%= item.name %></h5>
+                            <p class="mt-1"><%= item.address %>,<%= item.locality  %></p>
+                            <p class="mt-1"><%= item.district %>,<%= item.state %>-<%= item.pincode %></p>
+                            <p class="mt-4">Mobile : <b><%= item.mobile %></b></p>
+                            <div class="d-flex mt-4">
+                                <a data-item-id="<%= item._id %>" class="btn btn-sm border border-secondary px-3 me-2 deleteButton fw-bold">REMOVE</a>
+                                <a href="/editAddress/<%= item._id %>" class="btn btn-sm border border-secondary px-3 fw-bold">EDIT</a>
+                            </div>
+                        </div>
+                    </div>
+                <%})} %>
+            </div>
+            <div class="modal-container" id="modalContainer">
+                <div class="form-control modal-content text-center">
+                    <h6 class="py-4 border-bottom">Are you sure you want to remove this address?</h6>
+                    <div class="d-flex justify-content-center mt-2">
+                        <a class="btn w-100 border-end" id="confirmButton"><h6>Remove</h6></a>
+                        <a class="btn w-100" id="cancelButton"><h6>Cancel</h6></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="price--details mt-5">
+                    <h5 class="mb-2 fw-bold price">PRICE DETAILS</h5>
+                    <div style="width: 20rem;">
+                        <div class="mb-2 border-bottom">
+                            <div class="d-flex justify-content-between mb-1">
+                                <h6>Total MRP</h6>
+                                <h6 id="totalMRP"><%= totalMRP %></h6>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <h6>Discount MRP</h6>
+                                <h6 id="totalDiscountMRP"><%= discount %></h6>
+                            </div>
+                            <div class="d-flex justify-content-between mb-1">
+                                <h6>Coupon Discount</h6>
+                                <h6><%= -couponDiscount %></h6>
+                            </div>
+                        </div>
+                        <div class="grand-total">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="fw-bold">Total Amount</h6>
+                                <h5 id="totalAmount" class="fw-bold"><%= totalAmound %></h6>
+                            </div>
+                            <div class="d-grid gap-2 col-12">
+                                <button class="btn fw-bold com-buttons" type="submit">CONTINUE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <%} %>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/addressPopUp.js"></script>
+</body>
+<%- include('./foot.ejs') %>

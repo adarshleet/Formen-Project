@@ -1,0 +1,23 @@
+body{
+    padding-left: 17rem !important;
+    font-family: 'Source Sans 3', sans-serif !important;
+}
+
+/* Remove the increase and decrease arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.side-bar{
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+
+/* box shadow */
+.for-box{
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}

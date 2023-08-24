@@ -1,0 +1,53 @@
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
+}
+
+
+p{
+    margin: 0;
+}
+
+a:hover,a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.product-card{
+    width: 17rem;
+    font-family: 'Source Sans 3', sans-serif;
+    overflow: hidden;
+}
+
+.product-card:hover{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    transition: .2s ease-in-out;
+}
+  
+.product-name {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+  
+.product-name::after {
+    content: "...";
+}
+
+.selling-price{
+    font-size: 1.25rem;
+}
+
+.product-btns{
+    color: #8f8686;
+}

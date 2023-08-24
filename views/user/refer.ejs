@@ -1,0 +1,24 @@
+<%- include('./head.ejs') %>
+<link rel="stylesheet" href="/css/popUp.css">
+<link rel="stylesheet" href="/css/walletHistory.css">
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <main class="container-md px-md-5">
+        <%- include('./sideBar.ejs') %>
+        <%- include('./profileSide.ejs') %>
+                <div class="col-md-9 p-3 text-center">
+                    <h4 class="fw-bold mb-1">Referral Link</h4>
+                    <div class="py-5 mb-2" style="background-color: #f7f7f7;">
+                        <h5 class="fw-bold">Refer a friend and get ₹500</h5>
+                        <p class="mb-2">Copy this link and send it to your friend. Get ₹500 on walet for both after successfull signup.</p>
+                        <h5>http://localhost:3000/signup?referral=<%= user.referralCode %></h5>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/addressPopUpProfile.js"></script>
+    <script src="/javascript/header.js"></script>
+<%- include('./foot.ejs') %>

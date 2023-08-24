@@ -1,0 +1,91 @@
+
+
+
+  /* after */
+
+  .form-control{
+    font-size: 1rem !important;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+body{
+  background-color:#f0efef;
+}
+
+.main-form{
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+   border-radius: 5px;
+}
+
+.login-banner img{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.login-title{
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+}
+
+h3{
+    margin: 0;
+}
+
+.login-input{
+    font-weight: 300;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 1rem !important;
+}
+
+.login-btn{
+    background-color: #CE5F5F !important;
+    font-family: 'Source Sans 3', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+    color: #fff !important;
+}
+
+
+
+
+
+
+
+.countdown-container {
+  display: flex;
+  align-items: center;
+}
+
+/* .countdown { */
+  /* font-size: 1rem; */
+  /* font-family: monospace; */
+  /* padding: 10px; */
+  /* background-color: #f0f0f0; */
+  /* border: 2px solid #ddd; */
+  /* border-radius: 5px; */
+  /* margin-right: 10px; */
+/* } */
+
+.resend-button {
+  /* padding: 10px 15px; */
+  font-size: 1rem;
+  /* background-color: #007bff; */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.resend-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

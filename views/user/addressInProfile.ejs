@@ -1,0 +1,50 @@
+<%- include('./head.ejs') %>
+<link rel="stylesheet" href="/css/popUp.css">
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <main class="container-md px-md-5">
+        <%- include('./sideBar.ejs') %>
+        <%- include('./profileSide.ejs') %>
+                <div class="col-md-9 p-3">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-between mb-3 img-fluid" >
+                            <h5 class="fw-bold">Saved Addresses</h5>
+                            <a href="/addresses/addNewAddress" class="btn border border-secondary btn-sm fw-bold">ADD NEW ADDRESS</a>
+                        </div>
+                        <% if(address == undefined){%>
+                            <div class="text-center mt-5">
+                                <h5>Please add an address</h5>
+                            </div>
+                        <%}else{ address.address.forEach(item =>{%>
+                            <div class="p-3 mb-3 d-flex border img-fluid" style="height: 14rem; box-shadow:4px 4px 7px 3px rgba(0, 0, 0, 0.1);">
+                                <div class="ms-3">
+                                    <h5><%= item.name %></h5>
+                                    <p class="mt-1"><%= item.address %>, <%= item.locality  %></p>
+                                    <p class="mt-1"><%= item.district %>, <%= item.state %>-<%= item.pincode %></p>
+                                    <p class="mt-4">Mobile : <b><%= item.mobile %></b></p>
+                                    <div class="d-flex mt-4">
+                                        <a data-item-id="<%= item._id %>" class="btn btn-sm border border-secondary px-3 me-2 deleteButton fw-bold">REMOVE</a>
+                                        <a href="/addresses/editAddress/<%= item._id %>" class="btn btn-sm border border-secondary px-3 fw-bold">EDIT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <%})} %>
+                    </div>
+                    <div class="modal-container" id="modalContainer">
+                        <div class="form-control modal-content text-center">
+                            <h6 class="py-4 border-bottom">Are you sure you want to remove this address?</h6>
+                            <div class="d-flex justify-content-center mt-2">
+                                <a class="btn w-100 border-end" id="confirmButton"><h6>Remove</h6></a>
+                                <a class="btn w-100" id="cancelButton"><h6>Cancel</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/addressPopUpProfile.js"></script>
+    <script src="/javascript/header.js"></script>
+<%- include('./foot.ejs') %>

@@ -1,0 +1,243 @@
+.signup-child {
+    position: absolute;
+    top: 144px;
+    left: calc(50% - 180px);
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.25);
+    width: 22.5rem;
+    height: 29.63rem;
+  }
+  
+  .already-a-member {
+    font-weight: 300;
+  }
+  
+  .login {
+    font-weight: 600;
+  }
+  
+  .already-a-member-container {
+    position: absolute;
+    top: 585px;
+    left: calc(50% - 87px);
+    font-size: 0.94rem;
+    color: #aa9696;
+    cursor: pointer;
+  }
+  
+  .signup1 {
+    position: relative;
+    font-size: 1.13rem;
+    font-family: "Source Sans Pro";
+    color: #fff;
+    text-align: center;
+  }
+  
+  .frame-input,
+  .signup-child1,
+  .signup-inner,
+  .signup-item,
+  .signup-wrapper {
+    border: 1px solid rgba(182, 170, 158, 0.54);
+    position: absolute;
+    left: calc(50% - 132px);
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 16.56rem;
+    height: 2.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-wrapper {
+    cursor: pointer;
+    padding: 0.31rem 0;
+    background-color: #ce5f5f;
+    top: 539px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .frame-input,
+  .signup-child1,
+  .signup-inner,
+  .signup-item {
+    font-weight: 300;
+    font-family: "Red Hat Text";
+    font-size: 0.94rem;
+    background-color: rgba(154, 136, 136, 0);
+    top: 428px;
+    padding: 0 0.63rem;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .frame-input,
+  .signup-child1,
+  .signup-inner {
+    top: 475px;
+    left: calc(50% - 133px);
+    padding: 0 0.69rem;
+  }
+  
+  .frame-input,
+  .signup-child1 {
+    top: 381px;
+    left: calc(50% - 132px);
+    padding: 0 0.63rem;
+  }
+  
+  .signup-child1 {
+    top: 335px;
+    left: calc(50% - 133px);
+    padding: 0 0.69rem;
+  }
+  
+  .signup2 {
+    position: absolute;
+    top: 301px;
+    left: 588px;
+    font-family: "Source Sans Pro";
+  }
+  
+  .beige-brown-minimalist-casual {
+    position: absolute;
+    top: 144px;
+    left: 540px;
+    border-radius: 10px 10px 0 0;
+    width: 22.5rem;
+    height: 8.13rem;
+    object-fit: cover;
+  }
+  
+  .add-shopping-cart,
+  .heart-icon {
+    position: absolute;
+    top: 1px;
+    left: calc(50% + 69.5px);
+    width: 2.06rem;
+    height: 1.75rem;
+    object-fit: cover;
+  }
+  
+  .heart-icon {
+    left: calc(50% - 14.5px);
+    width: 2.04rem;
+  }
+  
+  .icons,
+  .user-icon {
+    position: absolute;
+    height: 1.88rem;
+  }
+  
+  .user-icon {
+    top: 0;
+    left: calc(50% - 102.5px);
+    width: 3.06rem;
+    object-fit: cover;
+  }
+  
+  .icons {
+    top: 24px;
+    left: 1117px;
+    width: 12.81rem;
+  }
+  
+  .caps,
+  .jeans,
+  .shirts,
+  .t-shirts {
+    position: relative;
+    display: inline-block;
+    width: 3.43rem;
+    flex-shrink: 0;
+  }
+  
+  .caps,
+  .shirts,
+  .t-shirts {
+    width: 3.82rem;
+  }
+  
+  .caps,
+  .t-shirts {
+    width: 5.12rem;
+  }
+  
+  .caps {
+    width: 2.85rem;
+  }
+  
+  .products {
+    position: absolute;
+    top: 29px;
+    left: 294px;
+    width: 26.44rem;
+    height: 1.31rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 59px;
+  }
+  
+  .c-a-s,
+  .formen {
+    position: relative;
+  }
+  
+  .formen {
+    display: inline-block;
+    width: 8.75rem;
+    height: 2.44rem;
+    flex-shrink: 0;
+  }
+  
+  .c-a-s {
+    font-size: 0.88rem;
+    font-family: "Abel";
+    margin-top: -0.56rem;
+  }
+  
+  .logo,
+  .navbar {
+    position: absolute;
+  }
+  
+  .logo {
+    top: 15px;
+    left: 105px;
+    width: 8.75rem;
+    height: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 2rem;
+    font-family: "Alegreya Sans SC";
+  }
+  
+  .navbar {
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 15px 2px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 5rem;
+    font-family: "ABeeZee";
+  }
+  
+  .signup {
+    position: relative;
+    background: linear-gradient(180deg, #f5f5f5, rgba(128, 214, 147, 0.77));
+    width: 100%;
+    height: 42.75rem;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.13rem;
+    color: #000;
+    font-family: "Red Hat Text";
+  }
+  

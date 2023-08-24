@@ -1,0 +1,118 @@
+<%- include('./head.ejs') %>
+<link rel="stylesheet" href="/css/popUp.css">
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <main class="container-md px-md-5">
+        <%- include('./sideBar.ejs') %>
+        <%- include('./profileSide.ejs') %>
+                <div class="col-md-9 p-3">
+                    <div>
+                        <div class="mb-3">
+                            <h6>Orders & Returns</h6>
+                        </div>
+                        <div>
+                            <% if(orders == undefined){ %>
+                                <div class="text-center mt-5">
+                                    <h5>No orders yet</h5>
+                                </div>
+                            <% }else{orders.forEach(item =>{ %>
+                                <div class="d-flex flex-column border p-2 border-secondary mb-3">
+                                    <p class="fw-bold mb-1">Order Id : <%= item._id %></p>
+                               <% item.orders.forEach(item =>{%>
+                            
+                                <div class="row p-2 mb-2 mx-1" style=" box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+                                    <div class="col-md-6">
+                                        <a class="d-flex" href="/order_details/<%= item._id %>">
+                                            <div class="img-fluid" style="width: 6.7rem;">
+                                                <img class="img-fluid" src="/images/<%= item.product.images[0].filename %>" alt="">
+                                            </div>
+                                            <div class="ms-2" style="width: 25em;">
+                                                <h6><%= item.product.brand %></h6>
+                                                <div>
+                                                    <p><%= item.product.name %></p>
+                                                </div>
+                                                <div class="d-flex my-2">
+                                                    <h6 class="me-3"><b>Size : <%= item.size %></b></h6>
+                                                    <h6><b>Quantity : <%= item.count %></b></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <% if(item.price === 0){%>
+                                                        <h5><b>Rs <%=item.walletUsed%></b></h5>
+                                                    <%}else{%>   
+                                                        <h5><b>Rs <%=item.price - item.walletUsed%></b></h5>
+                                                    <%} %>    
+                                                    <h6 class="text-danger ms-3"><%= item.paymentMethode %></h6>
+                                                </div>
+                                                <div class="mt-1">
+                                                    <%const date = new Date(item.orderDate);%>
+                                                    <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                                                    const formattedDate = date.toLocaleDateString('en-US', options); %>
+                                                    <%let status
+                                                    switch (item.orderStatus) {
+                                                       case 1: 
+                                                           status = 'Confirmed'
+                                                           break;
+                                                       case 2:
+                                                           status = 'Shipped'
+                                                           break;
+                                                       case 3:
+                                                           status= 'Out for delivery'
+                                                           break;
+                                                       case 4:
+                                                           status= 'Delivered'
+                                                           break;
+                                                       case 5:
+                                                           status= 'Cancelled'
+                                                           break;
+                                                       case 6:
+                                                           status= 'Cancelled by Admin'
+                                                           break;            
+                                                       default:
+                                                           break;
+                                                   } %>
+                                                    <p><%=status %> on <%= formattedDate %></p>
+                                                </div>
+                                            </div></a>
+                                    </div>
+                                    <div class="ms-5 col-md-5">
+                                        <div class="d-flex align-items-center">
+                                            <h6><b>Order Status : </b></h6>
+                                            <p class="text-danger"><b> <%=  status %></b></p>      
+                                        </div>
+                                        <div class="mt-2">
+                                        <button data-item-id="<%= item._id %>" class="btn btn-sm btn-danger deleteButton" <% if(item.orderStatus>2){%> hidden <%} %>>Cancel order</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <%})%>
+                            </div>
+                            <%})} %>
+                            <div class="clearfix d-flex flex-column align-items-center">
+                                <ul class="pagination">
+                                    <li class="page-item" <% if(page==1){%> hidden<%} %>><a href="?page=<%= page-1 %>" class="page-link" ><i class="fa fa-angle-double-left"></i></a></li>
+                                    <% for(let i=1 ; i<=totalPages;i++){%>
+                                    <li class="page-item <% if(page == i){%> active <%} %>"><a href="?page=<%= i %>" class="page-link fw-bold"  style="color: black;"><%= i %></a></li>
+                                    <%} %>
+                                    <li class="page-item" <% if(page==totalPages){%> hidden<%} %>><a href="?page=<%= page+1 %>" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="modal-container" id="modalContainer">
+                                <div class="form-control modal-content text-center">
+                                    <h6 class="py-4 border-bottom">Are you sure you want to cancel this order?</h6>
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button class="btn w-100 border-end" id="confirmButton"><h6>Yes</h6></button>
+                                        <button class="btn w-100" id="cancelButton"><h6>No</h6></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/orderCancelPopUp.js"></script>
+    <script src="/javascript/header.js"></script>
+<%- include('./foot.ejs') %>

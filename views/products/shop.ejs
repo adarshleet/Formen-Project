@@ -1,0 +1,69 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/shop.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+
+<body>
+    <%- include('./header.ejs') %>
+
+    <main class="container-fluid">
+        <div class="row px-md-4 mb-3 align-items-center">
+            <div class="col-md-6">
+                <h5>Available - <%= productsCount %> items</h5>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <div class="dropdown">
+                    <a class="btn border border-secondary dropdown-toggle d-flex align-items-center" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Sort by: <% if(sortToFront == 1){%> <h6 class="fw-bold mx-1">Price - Low To High</h6> <%}else if(sortToFront == -1){%><h6 class="fw-bold mx-1">Price - High To Low </h6><%} %>
+                    </a>
+                    <ul class="dropdown-menu text-center w-100" aria-labelledby="dropdownMenuLink">
+                      <li><h6 class="page-item my-2" data-do-sort="1"><a href="#">Price - Low To High </a></h6></li>
+                      <li><h6 class="page-item my-2" data-do-sort="-1"><a href="#" > Price - High To Low</a></h6></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top container-fluid p-0 pe-2">
+            <%- include('./sideBar.ejs') %>
+            <div class="col-md-10 mt-3">
+                <div class="row">
+                    <% products.forEach(item =>{  %>
+                        <div class="col-6 col-md-4 col-lg-3  ">
+                            <div class="card m-3 product-card border-0 px-2 img-fluid">
+                                <a href="/product?id=<%= item._id %>">
+                                <div>
+                                    <img src="/images/<%= item.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                </div>
+                                <div class="card-body p-0">
+                                    <h5 class="card-title fw-bold mt-1 mb-0"><%= item.brand %></h5>
+                                    <p class="card-text product-name"><%= item.name %>.</p>
+                                    <p> <b><span class="selling-price">Rs <%= item.sellingPrice %></span> </b> <s>Rs <%= item.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((item.actualPrice - item.sellingPrice) / item.actualPrice) * 100) %>%off)</span></p></a>
+                                    <div class="d-flex gap-2 mb-2">  
+                                        <button class="btn border w-100 fw-bold product-btns toWishlist <% if(productIdsAsString.includes(item._id.toString())){%> disabled btn-dark <%}%> " data-item-id="<%= item._id %>"><% if(productIdsAsString.includes(item._id.toString())){%> WISHLISTED <i class="fa-solid fa-heart"></i> <%}else{%> WISHLIST <i class="fa-regular fa-heart"></i><%} %></button>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="clearfix d-flex flex-column align-items-center">
+                    <ul class="pagination">
+                        <li class="page-item" <% if(page==1){%> hidden<%} %> data-page-no="<%= page -1 %>"><a href="#" class="page-link" ><i class="fa fa-angle-double-left"></i></a></li>
+                        <% for(let i=1 ; i<=totalPages;i++){%>
+                        <li class="page-item" data-page-no="<%= i %>"><a href="#" class="page-link fw-bold"  style="color: black;"><%= i %></a></li>
+                        <%} %>
+                        <li class="page-item" <% if(page==totalPages){%> hidden<%} %> data-page-no="<%= +page+1 %>"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('./footer.ejs') %>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/header.js"></script>
+    <script src="/javascript/filter.js"></script>
+    <script src="/javascript/shopPagination.js"></script>
+    <script src="/javascript/wishlist.js"></script>
+<%- include('./foot.ejs') %>

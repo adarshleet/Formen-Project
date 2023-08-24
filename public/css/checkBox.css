@@ -1,0 +1,42 @@
+.radio-container {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Hidden radio button style */
+  .hidden-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Radio button box style */
+  .radio-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.3rem;
+    border: 1px solid #c1bbbb;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    font-size: 1.1rem;
+  }
+
+  /* Pink tick style */
+  .radio-box::before {
+    content: "\2713"; /* Unicode character for checkmark */
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    color: rgb(150, 88, 100); /* Change this color to adjust the tick color */
+    opacity: 0;
+  }
+
+  /* Show the pink tick when radio button is selected */
+  .hidden-radio:checked + .radio-box::before {
+    opacity: 1;
+  }

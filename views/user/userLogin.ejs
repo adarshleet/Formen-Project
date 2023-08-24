@@ -1,0 +1,39 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/dash.css">
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <section class="row justify-content-center align-items-center mx-4" style="height: 86vh;">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <%- include('sideBar.ejs') %>
+                <div class="row justify-content-center col-sm-6 text-center text-black">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form class="main-form form-control p-0" action="/login" method="post" style="width: 21rem;">
+                            <div class="login-banner mb-4">
+                                <img class="img-fluid" src="/images/loginBanner.png" alt="">
+                            </div>
+                            <h6 class="text-center text-danger"><%=locals.context?context:'' %></h6>
+                            <h3 class="login-title text-start ms-4">Log in</h3>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="number" id="mobileInput" name="mobile" placeholder="Mobile Number" class="form-control login-input">
+                                <div id="mobileError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="password" id="passwordInput" name="password" placeholder="Password" class="form-control login-input">
+                            </div>
+                            <div class="d-grid gap-2 mx-3">
+                                <button class="btn login-btn mt-2" type="submit">Login</button>
+                            </div>
+                            <p class="pb-lg-2"><a class="text-muted" href="/reset-password">Forgot password?</a></p>
+                            <p>Don't have an account? <a href="/signup" class="link-info">SignUp</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/javascript/Validate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/javascript/header.js"></script>
+<%- include('./foot.ejs') %>

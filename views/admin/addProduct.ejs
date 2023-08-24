@@ -1,0 +1,14 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/products.css">
+  <title>Login Form</title>
+</head>
+<body>
+  <div class="logi">
+    <form class="rectangle-parent" action="/admin" method="post" >
+      <h3 class="admin-login">Add product</h3>
+      <input class="form-control group-input" name="username" type="text" placeholder="Username" />
+      <input class="form-control group-child3" name="password" type="password" placeholder="Password" />
+      <button class="rectangle-group" id="groupButton">Login</button>
+    </form>
+  </div>
+  <%- include('./foot.ejs') %>

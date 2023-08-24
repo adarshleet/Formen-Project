@@ -1,0 +1,47 @@
+<%- include('./head.ejs') %>
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/popUp.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <%- include('./header.ejs') %>
+        <main class="container">
+            <%- include('sideBar.ejs') %>
+            <div class="row container-fluid p-0 pe-2">
+                <div class="d-flex ms-4">
+                    <h5 class="fw-bold me-2">My Wishlist </h5>
+                    <h5> <%= wishlist.product.length %> items</h5>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row">
+                        <% wishlist?.product.forEach(item =>{  %>
+                            <div class="col-6 col-md-4 col-lg-3  ">
+                                <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
+                                    <div class="position-absolute" style=" top: 10px; right: 15px; font-size: 2rem;">
+                                        <a href="/removeFromWishlist/<%= item._id %>"><i class="fa-sharp fa-solid fa-circle-xmark" style="color: #323334;"></i></a>
+                                    </div>
+                                    <a href="/product?id=<%= item.product_id._id %>">
+                                    <div>
+                                        <img src="/images/<%= item.product_id.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="card-title fw-bold mt-1 mb-0"><%= item.product_id.brand %></h5>
+                                        <p class="card-text product-name"><%= item.product_id.name %>.</p>
+                                        <p> <b><span class="selling-price">Rs <%= item.product_id.sellingPrice %></span> </b> <s>Rs <%= item.product_id.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((item.product_id.actualPrice - item.product_id.sellingPrice) / item.product_id.actualPrice) * 100) %>%off)</span></p></a>
+                                        <!-- <div class="d-flex gap-2 mb-2">  
+                                            <button class="btn border w-100 fw-bold product-btns" data-bs-toggle="modal" data-bs-target="#exampleModal">MOVE TO BAG</button>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('./footer.ejs') %>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="/javascript/slider.js"></script>
+        <script src="/javascript/header.js"></script>
+
+<%- include('./foot.ejs') %>

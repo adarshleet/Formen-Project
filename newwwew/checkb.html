@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Radio Buttons Example</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .radio-container {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Hidden radio button style */
+    .hidden-radio {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Radio button box style */
+    .radio-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 50px;
+      border: 1px solid #9f9595;
+      margin-right: 10px;
+      cursor: pointer;
+      position: relative;
+      font-size: 14px;
+    }
+
+    /* Pink tick style */
+    .radio-box::before {
+      content: "\2713"; /* Unicode character for checkmark */
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: pink; /* Change this color to adjust the tick color */
+      opacity: 0;
+    }
+
+    /* Show the pink tick when radio button is selected */
+    .hidden-radio:checked + .radio-box::before {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="radio-container">
+    <input type="radio" id="male" name="gender" class="hidden-radio">
+    <label for="male" class="radio-box">Male</label>
+
+    <input type="radio" id="female" name="gender" class="hidden-radio">
+    <label for="female" class="radio-box">Female</label>
+  </div>
+</body>
+</html>

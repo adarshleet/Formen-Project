@@ -1,0 +1,73 @@
+/* Add your CSS styles here */
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.selected {
+    background-color: red;
+    color: white;
+}
+
+main{
+    font-family: 'Source Sans 3', sans-serif;
+}
+
+.addTocart{
+    width: 25rem;
+    height: 4rem;
+    background-color: #CE5F5F;
+    border: 0;
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 4px;
+}
+
+.wishlist{
+    width: 25rem;
+    height: 4rem;
+    background-color: transparent;
+    border: 2px solid #CE5F5F;
+    color:  #CE5F5F;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-radius: 4px;
+}
+
+
+p{
+    margin: 0;
+}
+
+.main-image0,
+.main-image1,
+.main-image2,
+.main-image3 {
+    
+    overflow: hidden;
+}
+
+#main-img0,
+#main-img1,
+#main-img2,
+#main-img3 {
+
+    transition: transform 0.3s ease;
+}

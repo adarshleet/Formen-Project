@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-pUA-Compatible" content="ie=edge" />
+    <title>Star Rating in HTML CSS & JavaScript</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <style>
+.rating-box .stars {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.stars i {
+  color: #a39898;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.stars i.active {
+  color: #e3ff11;
+}
+    </style>
+  </head>
+  <body>
+    <form id="ratingForm" action="/submit-rating" method="POST">
+      <div class="rating-box">
+        <div class="stars">
+          <i class="fa-solid fa-star" data-value="1"></i>
+          <i class="fa-solid fa-star" data-value="2"></i>
+          <i class="fa-solid fa-star" data-value="3"></i>
+          <i class="fa-solid fa-star" data-value="4"></i>
+          <i class="fa-solid fa-star" data-value="5"></i>
+        </div>
+        <input type="hidden" id="selectedValue" name="selectedValue" value="">
+        <button type="submit">Submit Rating</button>
+      </div>
+    </form>
+
+    <script>
+      const stars = document.querySelectorAll(".stars i");
+
+      stars.forEach((star, index1) => {
+        star.addEventListener("click", () => {
+          const selectedValue = star.getAttribute("data-value");
+
+          stars.forEach((star, index2) => {
+            index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
+          });
+
+          const selectedValueInput = document.getElementById("selectedValue");
+          selectedValueInput.value = selectedValue;
+        });
+      });
+    </script>
+  </body>
+</html>

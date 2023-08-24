@@ -1,0 +1,137 @@
+<%- include('./head.ejs') %>
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/popUp.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <%- include('./headerForPayment.ejs') %>
+        <main class="mx-3">
+            <% if(cart.length === 0){%>
+                <div class="d-flex justify-content-center align-items-center flex-column text-center mt-5">
+                    <div style="width: 20rem;">
+                        <img class="img-fluid" src="/images/emptyBag.webp" alt="">
+                    </div>
+                    <h4 class="mb-3">There is nothing in your bag. Lets add some items</h4>
+                    <a href="/wishlist" class="btn btn-primary fw-bold btn-lg text-white">ADD FROM YOUR WISHLIST</a>
+                </div>
+            <%}else{%>
+            <div class="row">
+                <div class="col-md-7 border-end mt-2">
+                    <% cart.forEach(item =>{%>
+                        <div class="d-flex justify-content-end">
+                            <div class="d-flex mb-3 p-2 border item-set" style="width: 37rem; height: 11rem;">
+                                <div>
+                                    <a href="/product?id=<%= item.product_id._id %>"><img class="img-fluid" style="height:10rem" src="/images/<%=item.product_id.images[0].filename %>" alt=""></a>
+                                </div>
+                                <div class="ms-2">
+                                    <h5 class="mb-1"><%= item.product_id.brand %></h5>
+                                    <h6 class="mb-1 product-name"><%= item.product_id.name %></h6>
+                                    <div class="d-flex mb-1">
+                                        <button class="btn btn-sm btn-light border me-2"><b>Size: <%= item.size %></b></button>
+                                        <div class="d-flex">
+                                            <!-- Assign unique IDs to the increase and decrease buttons -->
+                                            <button type="button" class="btn btn-sm btn-light border ms-2 countButton" data-item-id="<%= item._id %>"
+                                                data-to-do="decrease"><b>-</b></button>
+                                            <p class="d-inline countOnScreen fw-bold mx-1" id="item_count_<%= item._id %>"><%= item.count %></p>
+                                            <button type="button" class="btn btn-sm btn-light border me-2 countButton" data-item-id="<%= item._id %>"
+                                                data-to-do="increase"><b>+</b></button>
+                                            <div class="d-inline text-danger fw-bold" id="message_<%= item._id %>"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-1">
+                                        <h5 class="d-inline fw-bold sellingPrice" id="selling_price_<%= item._id %>">Rs <%=item.count * item.product_id.sellingPrice %> </h5>
+                                        <h6 class="d-inline text-decoration-line-through actualPrice" id="actual_price_<%= item._id %>">Rs <%=item.count * item.product_id.actualPrice %> </h6> 
+                                        <span class="text-danger"><p class="d-inline">(<%= Math.round(((item.product_id.actualPrice - item.product_id.sellingPrice) / item.product_id.actualPrice) * 100) %>%off)</p></span>
+                                    </div>
+                                    <div class="d-flex">
+                                            <button data-item-id="<%= item._id %>" class="deleteButton btn btn-sm btn-secondary me-2 fw-bold">REMOVE</button>
+                                            <button class="btn btn-sm btn-secondary fw-bold">MOVE TO WISHLIST</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <%}) %>
+                    <div class="modal-container" id="modalContainer">
+                        <div class="form-control modal-content text-center">
+                            <h6 class="py-4 border-bottom">Are you sure you want to remove this item?</h6>
+                            <div class="d-flex justify-content-center mt-2">
+                                <button class="btn w-100 border-end" id="confirmButton"><h6>Remove</h6></button>
+                                <button class="btn w-100" id="cancelButton"><h6>Cancel</h6></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="mt-2 d-flex flex-column align-items-center align-items-md-start">
+                        <div class="p-2 border" style="width: 21rem; ">
+                            <% if(couponSelected == undefined){%>
+                            <div class="p-2">
+                                <h6 class="fw-bold">COUPONS</h6>
+                                <div class="mt-2">
+                                    <input type="text" id="couponInput">
+                                    <button class="btn btn-sm btn-secondary" id="apply-coupon">APPLY</button>
+                                </div>
+                                <div id="couponMessage" class="text-danger"></div>
+                            </div>
+                            <%}else{%>
+                            <div class="d-flex border p-3 w-100 justify-content-between my-2" style="background-color: antiquewhite;">
+                                <h6>Coupon Applied : <b><%= couponSelected.couponName %></b></h6>
+                                <a href="/coupon_remove"><i class="fa-solid fa-trash" style="color: #666b70;"></i></a>
+                            </div>
+                            <%} %>
+                            <div style="height: 20rem; overflow: auto;">
+                                <% couponsToDisplay.forEach(item =>{%>
+                                <div class="border border-secondary my-1 p-2" style="background-color: rgb(234, 242, 243);">
+                                    <div>
+                                        <h6 class="fw-bold"><%= item.couponName %></h6>
+                                    </div>
+                                    <P class="fw-bold">Save ₹<%= item.maximumDiscount %></P>
+                                    <p>₹<%= item.maximumDiscount %> off on minimum purchase of ₹<%= item.minimumPurchase %> </p>
+                                    <%const date = new Date(item.lastDate);%>
+                                    <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                                    const formattedDate = date.toLocaleDateString('en-US', options); %>
+                                    <p>Expires on <%= formattedDate %></p>
+                                </div>
+                                <%}) %>
+                            </div>
+                        </div>
+                        <div class="price--details mt-3">
+                            <h5 class="mb-2 fw-bold price">PRICE DETAILS</h5>
+                            <div style="width: 20rem;">
+                                <div class="mb-2 border-bottom">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6>Total MRP</h6>
+                                        <h6 id="totalMRP"><%= totalMRP %></h6>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6>Discount MRP</h6>
+                                        <h6 id="totalDiscountMRP"><%= discount %></h6>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6>Coupon Discount</h6>
+                                        <h6 id="couponDiscount"><%= -couponDiscount %></h6>
+                                    </div>
+                                </div>
+                                <div class="grand-total">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h6 class="fw-bold">Total Amount</h6>
+                                        <h6 class="fw-bold" id="totalAmount"><%= totalAmound %></h6>
+                                    </div>
+                                    <div class="d-grid gap-2 col-12">
+                                        <a href="/address" class="btn com-buttons fw-bold" type="button">PLACE ORDER</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <%}%>
+            
+        </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/couponSelect.js"></script>
+    <script src="/javascript/popUp.js"></script>
+    <script src="/javascript/count.js"></script>
+<%- include('./foot.ejs') %>

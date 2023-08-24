@@ -1,0 +1,125 @@
+<%- include('./head.ejs') %>
+        <link rel="stylesheet" href="/css/singleProduct.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <%- include('./header.ejs') %>
+        <main class="md-5 mt-2 container">
+            <div class="row justify-content-center mb-4">
+                <%- include('./sideBarSingle.ejs') %>
+                <div class="row col-lg-7 col-sm-12">
+                    <% product.images.forEach(item=>{ %>
+                        <div class="card col-6 col-lg-6 p-0 main-image<%= product.images.indexOf(item) %>">
+                            <img class="img-fluid" id="main-img<%= product.images.indexOf(item) %>" src="/images/<%= item.filename %>" alt="">
+                        </div>
+                    <% }) %>  
+                </div>
+                <div class="col-lg-5 col-sm-12">
+                    <div class="border-bottom mb-3">
+                        <h2><b><%= product.brand %></b></h2>
+                        <h4><%= product.name %></h4>
+                        <div class="border border-secondary my-3 text-center" style="width: 8rem;">
+                            <% if(averageRating){%>
+                                <a href="/product/reviews/<%= product._id %>"><p><b><%= averageRating %></b><i class="fa-sharp fa-solid fa-star" style="color: #676c74;"></i> | <%= numReviews %> ratings</p></a>
+                            <%}else{%>
+                                <a href="/product/reviews/<%= product._id %>"><p>No Ratings</p></a>
+                            <%} %>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="d-inline"><b>Rs <%= product.sellingPrice %> </b></h3> 
+                        <h5 class="d-inline"><s>Rs <%= product.actualPrice %> </s></h5> 
+                        <span class="text-danger"><h6 class="d-inline">(<%= Math.round(((product.actualPrice - product.sellingPrice) / product.actualPrice) * 100) %>%off)</h6></span>
+                    </div>
+                    <div class="mt-4">
+                        <form id="myForm" class="mt-3 mb-4" method="POST" action="/addToCart/<%= product._id %>">
+                            <h6 class="my-2"><b>SELECT SIZE</b></h6>
+                            <div id="buttonContainer" class="mb-5">
+                                <% product.category.size.forEach(size =>{ %>
+                                    <button type="button" class="button" data-value="<%= size %>" onclick="selectButton('<%= product.category.size.indexOf(size)+1 %>')"><b><%= size %></b></button>
+                                <% }) %>
+                            </div>
+                            <input type="hidden" id="selectedValueInput" name="selectedValue">
+                            <div>
+                                <h6 class="text-center"><%=locals.context?context:'' %></h6>
+                            </div>
+                            <div class="d-flex  gap-2 mx-auto mt-1 pb-4 w-100  border-bottom">
+                                <!-- <div class="col-12 col-md-6 w-50" > -->
+                                    <button class="addTocart col-md-6 w-50" type="submit">ADD TO BAG <i class="fa-sharp fa-solid fa-bag-shopping" style="color: #fff;"></i></button>
+                                <!-- </div> -->
+                                <!-- <div class="col-12 col-md-6" > -->
+                                    <button class="btn wishlist col-md-6 w-50 toWishlist <% if(productIdsAsString.includes(product._id.toString())){%>disabled btn-dark <%}%>" data-item-id="<%= product._id %>"><% if(productIdsAsString.includes(product._id.toString())){%> WISHLISTED <i class="fa-solid fa-heart"></i> <%}else{%> WISHLIST <i class="fa-regular fa-heart"></i><%} %></button>
+                                    
+                                <!-- </div> -->
+                            </div>
+                        </form>
+                        <div class="my-5">
+                            <h5>100% Original Products</h5>
+                            <h5>Pay on delivery might be available</h5>
+                            <h5>Easy 14 days returns and exchanges</h5>
+                            <h5>Try & Buy might be available</h5>
+                        </div>
+                        <div class="my-4">
+                            <h5><b>PRODUCT DETAILS <i class="fa-solid fa-rectangle-list" style="color: #000000;"></i></b></h5>
+                            <div class="">
+                                <h5 style="line-height: 1.8rem;"><%= product.description %></h5>
+                            </div>
+                        </div>
+                        <div>
+                            <div class=" mt-4 border-secondary border-bottom border-top ">
+                                <div class=" p-1">
+                                    <h5 class="fw-bold">RATINGS <i class="fa fa-light fa-star"></i></h5>
+                                </div>
+                                <%if(averageRating){%>
+                                <a href="/product/reviews/<%= product._id %>">
+                                <div class="d-flex my-3">
+                                    <div class="m-3 ms-5 d-flex flex-column justify-content-center" >
+                                        <h1><%= averageRating %><i class="fa-solid fa-star" style="color: #a4a5a8;"></i></h1>
+                                        <h5><%= numReviews %> Verified buyers</h5>
+                                    </div>
+                                </div>
+                                </a>
+                                <%}else{%>
+                                    <a href="/product/reviews/<%= product._id %>"><p>No Rating Yet</p></a>
+                                <%}%>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-5">
+                <div class="text-center mt-5">
+                    <h2 class="">SIMILAR  ITEMS</h2>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row">
+                        <% similarItems.forEach(item =>{  %>
+                            <div class="col-6 col-md-4 col-lg-3  ">
+                                <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
+                                    <a href="/product?id=<%= item._id %>">
+                                    <div>
+                                        <img src="/images/<%= item.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="card-title fw-bold mt-1 mb-0"><%= item.brand %></h5>
+                                        <p class="card-text product-name"><%= item.name %>.</p>
+                                        <p> <b><span class="selling-price">Rs <%= item.sellingPrice %></span> </b> <s>Rs <%= item.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((item.actualPrice - item.sellingPrice) / item.actualPrice) * 100) %>%off)</span></p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('./footer.ejs') %>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="/javascript/sizeSelect.js"></script>
+        <script src="/javascript/imgZoom.js"></script>
+        <script src="/javascript/imgZoom1.js"></script>
+        <script src="/javascript/imgZoom2.js"></script>
+        <script src="/javascript/imgZoom3.js"></script>
+        <script src="/javascript/header.js"></script>
+        <script src="/javascript/wishlist.js"></script>
+<%- include('./foot.ejs') %>

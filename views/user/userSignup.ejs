@@ -1,0 +1,48 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/dash.css">
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <section class="row justify-content-center align-items-center mx-4" style="height: 86vh;">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <%- include('./sideBar.ejs') %>
+                <div class="row justify-content-center col-sm-6 text-center text-black">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form class="main-form form-control p-0" id="signup-form" style="width: 21rem;" action="/signup" method="post">
+                            <div class="login-banner mb-4">
+                                <img class="img-fluid" src="/images/loginBanner.png" alt="">
+                            </div>
+                            <h6 class="text-center text-danger"><%=locals.context?context:'' %></h6>
+                            <h3 class="login-title text-start ms-4">Sign Up</h3>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="text" name="name" id="nameInput" placeholder="Name" class="form-control login-input">
+                                <div id="nameError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="number" name="mobile" id="mobileInput" placeholder="Mobile Number" class="form-control login-input">
+                                <div id="mobileError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="password" name="password" id="passwordInput" placeholder="Password" class="form-control login-input">
+                                <div id="passwordError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="password" name="confirmPassword" id="confirmPasswordInput" placeholder="Confirm Password" class="form-control login-input">
+                                <div id="confirmPasswordError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <input type="text" name="referral" hidden value="<%= referral %>">
+                            <div class="d-grid gap-2 mx-3">
+                                <button class="btn login-btn mt-2" id="submitButton" type="submit">Sign Up</button>
+                            </div>
+                            <p>Already a member? <a href="/login" class="link-info">Login</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/javascript/Validate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/javascript/header.js"></script>
+    <%- include('./foot.ejs') %>

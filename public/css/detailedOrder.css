@@ -1,0 +1,77 @@
+.container-new {
+    width: 22rem;
+    height: .4rem;
+    border: 1px solid #ab9c9c;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .filling-div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #ee6969; /* Set the color for the filling effect */
+    
+  }
+
+  .fill-1{
+    animation: fillEffect1 2.5s linear forwards; /* Animation to fill the div over 5 seconds */
+  }
+
+  @keyframes fillEffect1 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 0%;
+    }
+  }
+
+  .fill-2{
+    animation: fillEffect2 2.5s linear forwards; /* Animation to fill the div over 5 seconds */
+  }
+
+  @keyframes fillEffect2 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 33%;
+    }
+  }
+
+  .fill-3{
+    animation: fillEffect3 2.5s linear forwards; /* Animation to fill the div over 5 seconds */
+  }
+
+  @keyframes fillEffect3 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 66%;
+    }
+  }
+
+  .fill-4{
+    animation: fillEffect4 2.5s linear forwards; /* Animation to fill the div over 5 seconds */
+  }
+
+  @keyframes fillEffect4 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+
+  
+
+  .order-status-text{
+    font-size: .9rem;
+  }

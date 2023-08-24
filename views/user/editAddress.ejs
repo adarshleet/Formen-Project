@@ -1,0 +1,48 @@
+<%- include('./head.ejs') %>
+        <link rel="stylesheet" href="/css/address.css">
+        <title>address</title>
+            </head>
+            <body>
+                <section class="row justify-content-center align-items-center mx-4 vh-100">
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="row justify-content-center col-sm-6 text-center text-black">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <form class="main-form form-control py-4" id="addressForm" method="post" action="/editAddress" style="width: 30rem;">
+                                        <h5 class="login-title text-start ms-4">EDIT ADDRESS</h5>
+                                        <div class="form-outline mb-3 mx-3">
+                                            <input type="text" name="name" id="nameInput" placeholder="Name" value="<%= address.name %>" class="form-control login-input">
+                                        </div>
+                                        <div class="form-outline mb-3 mx-3">
+                                            <input type="number" name="mobile" id="mobileInput" placeholder="Mobile Number" value="<%= address.mobile %>" class="form-control login-input">
+                                        </div>
+                
+                                        <div class="form-outline mb-3 mx-3">
+                                            <input type="text" placeholder="Address" id="addressInput" name="address" value="<%= address.address %>" class="form-control login-input">
+                                        </div>
+                                        <div class="form-outline mb-3 mx-3">
+                                            <input type="text" placeholder="Locality/Town" id="localityInput" name="locality" value="<%=address.locality%>" class="form-control login-input">
+                                        </div>
+                                        <div class="form-outline mb-3 mx-3">
+                                            <input type="number" placeholder="Pincode" id="pincodeInput" name="pincode" value="<%= address.pincode %>" class="form-control login-input">
+                                        </div>
+                                        <div class="form-outline mb-3 mx-3">
+                                            <input type="text" placeholder="District" id="districtInput" name="district" value="<%=address.district%>" class="form-control login-input">
+                                        </div>
+                                        <div class="form-outline mb-3 mx-3">
+                                            <input type="text" placeholder="State" id="stateInput" name="state" value="<%= address.state %>" class="form-control login-input">
+                                            <input type="text" name="id" value="<%= address._id  %>" hidden>
+                                        </div>
+                                        <p class="text-center text-danger" id="result"></p>
+                                        <div class="d-grid gap-2 mx-3 my-2">
+                                            <button class="btn btn-sm login-btn" type="submit">SAVE ADDRESS</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </body>  
+            <script src="/javascript/validateAddress.js"></script>
+<%- include('./foot.ejs') %>

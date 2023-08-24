@@ -1,0 +1,70 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+    <body>
+        <main class="row mx-2">
+            <%- include('./sideBar.ejs') %>
+            <div class="col-md-12 text-center" style="background-color: #F5F5F9;">
+                <div class="container mt-4">
+                    <div class="table-wrapper for-box mb-2">
+                        <div class="table-title">
+                            <h1 class="text-center">User Details</h1>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-4">
+                                    <form class="search-box d-flex">
+                                        <input type="text" name="search" class="form-control d-inline" placeholder="Enter the name">
+                                        <button class="btn btn-light d-inline" type="submit">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="text-center text-danger"><%=locals.context?context:'' %></h4>
+                        </div>
+                        <div class="table-responsive">
+                            <% if(users.length>0) {%>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</i></th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for(let i=0;i<users.length;i++){%>
+                                        <tr>
+                                            <td><%= (limit*currentPage)+i-1 %></td>
+                                            <td><%=users[i].name%></td>
+                                            <td><%=users[i].mobile%></td>
+                                            <td>
+                                                <a href="/admin/user/block_user/<%=users[i]._id%>" onclick="return confirm('Are you sure you want to block/unblock this user?')"  class="btn btn-sm <%= users[i].isBlocked ? 'btn-danger' : 'btn-primary' %> delete" title="Delete"><%= users[i].isBlocked ? 'Unblock' : 'Block' %></a>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                                <%}}%>
+                            </table>
+                            <div class="clearfix">
+                                <div class="hint-text me-2">Showing <b><%= users.length %></b> out of <b><%= usersCount %></b> entries </div>
+                                    <ul class="pagination">
+                                        <li class="page-item" <% if(currentPage==1){%> hidden<%} %> data-page-no="<%= currentPage -1 %>"><a href="#" class="page-link"><i class="fa fa-angle-double-left"></i></a></li>
+                                        <% for(let i=1;i<=totalPages;i++){%>
+                                        <li class="page-item<% if(i==currentPage){%> active<%} %>" data-page-no="<%= i %>"><a href="#" class="page-link"><%= i %></a></li>
+                                        <%} %>
+                                        <li class="page-item" <% if(currentPage==totalPages){%> hidden<%} %> data-page-no="<%= +currentPage +1 %>"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+                                    </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="/javascript/search.js"></script>
+        <script src="/javascript/editProduct.js"></script>
+        <script src="/javascript/categorySelect.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<%- include('./foot.ejs') %>

@@ -1,0 +1,35 @@
+.form-control{
+    font-size: 1rem !important;
+}
+
+.main-form{
+   border-radius: 5px;
+}
+
+.login-banner img{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.login-title{
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+}
+
+h3{
+    margin: 0;
+}
+
+.login-input{
+    font-weight: 300;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 1rem;
+}
+
+.login-btn{
+    background-color: #CE5F5F;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #fff;
+}

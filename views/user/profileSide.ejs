@@ -1,0 +1,19 @@
+<div class="row">
+    <h5>Account</h5>
+    <p><%= user.name %></p>
+</div>
+<div class="row border-top">
+
+        <div class="col-md-3 p-3 border-end d-flex flex-column">
+            <div>
+                <a href="/profile"><h6 class="mb-3">Profile details</h6></a>
+                <a href="/orders&returns"><h6 class="mb-3">Orders & Returns</h6></a>
+                <a href="/addresses"><h6 class="mb-3">Addresses</h6></a>
+                <a href="/wallet"><h6 class="mb-3">Wallet</h6></a>
+                <a href="/profile/referral"><h6 class="mb-3">Referral Link</h6></a>
+            </div>
+        
+            <form class="mt-5" action="/logout" method="post">
+                <button class="btn btn-danger w-100 fw-bold">LOGOUT</button>
+            </form>
+        </div>

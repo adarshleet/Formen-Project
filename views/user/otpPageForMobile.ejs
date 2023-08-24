@@ -1,0 +1,34 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/otp.css">
+</head>
+<body>
+    <section class="row justify-content-center align-items-center mx-4" style="height: 86vh;">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="row justify-content-center col-sm-6 text-center text-black">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form class="main-form form-control py-4 px-2" action="/mobileChangeConfirm" method="post" style="width: 21rem;">
+                            <div class="d-flex justify-content-start">
+                                <img class="img-fluid ms-3 mb-2" src="/images/otpImg.avif" alt="" style="width: 6rem;">
+                            </div>
+                            <h6 class="text-center text-danger"><%=locals.context?context:'' %></h6>
+                            <h5 class="login-title text-start ms-4">Verify with OTP</h5>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="text" hidden name="mobile" value="<%= mobile %>">
+                                <input type="number" name="otp" placeholder="OTP" class="form-control login-input">
+                            </div>
+                            <div class="d-grid gap-2 mx-3 mb-2">
+                                <div class="countdown-container justify-content-center">
+                                    <div class="countdown text-danger" id="countdown">30</div>
+                                    <a href="/otpResend" class="btn btn-secondary fw-bold w-100" id="resendButton" type="submit" hidden >Resend OTP</a>
+                                </div>
+                                <button class="btn btn-secondary fw-bold" id="otpVerifyButton" type="submit">Verify OTP</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/javascript/otpTimer.js"></script>
+<%- include('./foot.ejs') %>

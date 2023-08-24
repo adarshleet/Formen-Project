@@ -1,0 +1,45 @@
+<%- include('./head.ejs') %>
+<link rel="stylesheet" href="/css/popUp.css">
+<link rel="stylesheet" href="/css/walletHistory.css">
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <main class="container-md px-md-5">
+        <%- include('./sideBar.ejs') %>
+        <%- include('./profileSide.ejs') %>
+                <div class="col-md-9 p-3 text-center">
+                    <h4 class="fw-bold mb-1">Wallet</h4>
+                    <div class="py-5 mb-2" style="background-color: #f7f7f7;">
+                        <h5>Total wallet balance</h5>
+                        <h1>₹ <%= user.wallet %></h1>
+                    </div>
+                    <div class="table">
+                        <h5 class="fw-bold mb-1">Wallet History</h6>
+                        <div class="table-header">
+                            <div class="header__item"><a id="name" class="filter__link">Date</a></div>
+                            <div class="header__item"><a id="draws" class="filter__link filter__link--number">method</a></div>
+                            <div class="header__item"><a id="losses" class="filter__link filter__link--number">Type</a></div>
+                            <div class="header__item"><a id="losses" class="filter__link filter__link--number">Amount</a></div>
+                        </div>
+                        <% walletHistory.forEach(item =>{%>
+                        <div class="table-content">	
+                            <div class="table-row">
+                                <%const date = new Date(item.date);%>
+                                <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                                const formattedDate = date.toLocaleDateString('en-US', options); %>		
+                                <div class="table-data"><%= formattedDate %></div>
+                                <div class="table-data"><%= item.transactionType %></div>
+                                <div class="table-data"><%= item.method %></div>
+                                <div class="table-data">₹<%= item.amount %></div>
+                            </div>
+                        </div>	
+                        <%}) %>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/addressPopUpProfile.js"></script>
+    <script src="/javascript/header.js"></script>
+<%- include('./foot.ejs') %>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Alegreya+Sans+SC:wght@700;800&family=Red+Hat+Text:wght@300&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/products.css">
+  <title>Login Form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit product</h5>
+        </div>
+        <form class="mx-1 my-4 mx-md-4" id="signup-form" method="post" action="/admin/products/updateProduct" enctype="multipart/form-data">
+            <div class="d-flex flex-row align-items-center mb-3">
+                <div class="form-outline flex-fill mb-0">
+                    <label class="sign-form-label" for="form3Example1c">Product Name</label>
+                    <input type="text" name="name" value="<%=products.name%>" id="form3Example1c" class="form-control" />
+                    <input type="text" name="id" value="<%=products._id%>" hidden />
+                </div>
+            </div>
+            <div>
+                <label class="sign-form-label" for="form3Example1c">Category</label>
+                <select class="form-select d-flex flex-row align-items-center mb-3" value="<%= products.category.category  %>" name="category" id="firstDropdown" aria-label="Default select example">
+                    <option value="<%= products.category._id %>" selected><%= products.category.category  %></option>
+                    <%category.forEach(category => {%>
+                        <option value=<%= category._id %>><%=category.category%></option>
+                    <%}); %>
+                </select>
+            </div>
+            <div>
+                <label class="sign-form-label" for="form3Example1c">Brand</label>
+                <select class="form-select d-flex flex-row align-items-center mb-3" name="brand" aria-label="Default select example">
+                    <option selected><%= products.brand %></option>
+                    <%products.category.brand.forEach(brand => {%>
+                        <option value=<%= brand %>><%= brand %></option>
+                    <%}); %>
+                </select>
+            </div>
+            <div>
+                <label class="sign-form-label" for="form3Example1c">Size</label>
+                <select class="form-select d-flex flex-row align-items-center mb-3" name="size" aria-label="Default select example">
+                    <option selected><%= products.size %></option>
+                    <%products.category.size.forEach(size => {%>
+                        <option value=<%= size %>><%= size %></option>
+                    <%}); %>
+                </select>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-3">
+                <div class="form-outline flex-fill mb-0">
+                    <label class="sign-form-label" for="form3Example4cd">Cost</label>
+                    <input type="number" name="cost" value="<%= products.cost %>" class="form-control" />
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-3">
+                <div class="form-outline flex-fill mb-0">
+                    <label class="sign-form-label" for="form3Example4cd">Actual Price</label>
+                    <input type="number" name="actualPrice" value="<%= products.actualPrice %>"  class="form-control" />
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-3">
+                <div class="form-outline flex-fill mb-0">
+                    <label class="sign-form-label" for="form3Example4cd">Selling Price</label>
+                    <input type="number" name="sellingPrice" value="<%= products.sellingPrice %>" class="form-control" />
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-3">
+                <div class="form-outline flex-fill mb-0">
+                    <label class="sign-form-label" for="form3Example4cd">Stock</label>
+                    <input type="number" name="stock" value="<%= products.stock %>" class="form-control" />
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mb-3">
+                <div class="form-outline flex-fill mb-0">
+                    <label class="sign-form-label" for="form3Example4cd">product description</label>
+                    <textarea type="text" name="description" style="resize: none;" class="form-control" cols="30" rows="5"><%= products.description %></textarea>
+                </div>
+            </div>
+            <div class="d-flex contanier">
+                <% products.images.forEach(image =>{%>
+                    <div class="d-flex flex-column align-items-center ms-3 mb-3">
+                        <div class="form-outline d-flex flex-column mb-0">
+                            <label class="sign-form-label" for="form3Example4cd">Image <%= products.images.indexOf(image)+1 %></label>
+                            <img src="/images/<%= image.filename %>" class="w-50" alt="">
+                            <a href="/admin/products/deleteImg?filename=<%= image.filename %>&id=<%= products._id %>" class="btn btn-sm btn-danger mt-2 w-50">delete</a>
+                        </div>
+                    </div>
+                <% }) %>
+                <%for(let i=0;i<4-products.images.length;i++){%>
+                    <div class="form-outline flex-fill mb-0">
+                        <label class="sign-form-label">Image <%= i %></label>
+                        <input type="file" name="image">
+                    </div>
+                <% } %>
+            </div>
+            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                <button type="submit" id="submitButton" class="btn btn-primary btn-lg">Save</button>
+            </div>
+        </form>
+    </div>
+    <script src="/javascript/categorySelect.js"></script>
+<%- include('./foot.ejs') %>

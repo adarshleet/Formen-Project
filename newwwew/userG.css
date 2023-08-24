@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    line-height: normal;
+  }
+  
+  :root {
+    /* fonts */
+    --font-abel: Abel;
+    --font-alegreya-sans-sc: "Alegreya Sans SC";
+    --font-abeezee: ABeeZee;
+    --font-source-sans-pro: "Source Sans Pro";
+    --font-red-hat-text: "Red Hat Text";
+  
+    /* font sizes */
+    --font-size-lg: 1.13rem;
+    --font-size-mini: 0.94rem;
+  
+    /* Colors */
+    --color-white: #fff;
+    --color-black: #000;
+    --color-darkgray-100: rgba(182, 170, 158, 0.54);
+    --color-gray: rgba(154, 136, 136, 0);
+  
+    /* Paddings */
+    --padding-2xs: 0.69rem;
+    --padding-3xs: 0.63rem;
+  
+    /* border radiuses */
+    --br-3xs: 10px;
+    --br-8xs: 5px;
+  }
+  

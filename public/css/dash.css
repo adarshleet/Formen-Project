@@ -1,0 +1,50 @@
+.form-control{
+    font-size: 1rem !important;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+body{
+    background: linear-gradient(180deg, #fff, #80D693);
+    min-height: 100vh;
+}
+
+.main-form{
+   box-shadow:  4px 4px 7px 3px rgba(0, 0, 0, 0.25);
+   border-radius: 5px;
+}
+
+.login-banner img{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.login-title{
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+}
+
+h3{
+    margin: 0;
+}
+
+.login-input{
+    font-weight: 300;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 1rem !important;
+}
+
+.login-btn{
+    background-color: #CE5F5F !important;
+    font-family: 'Source Sans 3', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+    color: #fff !important;
+}

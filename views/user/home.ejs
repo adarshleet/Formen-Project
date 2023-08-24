@@ -1,0 +1,128 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/slider.css">
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <main class="mx-3">
+        <div>
+            <%- include('sideBar.ejs') %>
+            <div class="slider">
+                <% banner.images.forEach(image =>{%>
+                    <div class="slide active">
+                        <img class="img-fluid" src="/images/<%= image.filename %>" alt="">
+                    </div>
+                <%}) %>
+                <div class="navigation">
+                  <i class="fas fa-chevron-left prev-btn"></i>
+                  <i class="fas fa-chevron-right next-btn"></i>
+                </div>
+              </div>
+        </div>
+        <div>
+            <div class="d-flex justify-content-center py-3 py-md-5" id="newArrivals">
+                <h1 class="px-2">N E W</h1>
+                <h1 class="px-2">A R R I V A L S</h1>
+            </div>
+            <div class="mb-5">
+                <div class="text-center">
+                    <h2 class="fw-bold">J E A N S</h2>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row">
+                        <% jeans.forEach(item =>{  %>
+                            <div class="col-6 col-md-4 col-lg-3  ">
+                                <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
+                                    <a href="/product?id=<%= item._id %>">
+                                    <div>
+                                        <img src="/images/<%= item.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="card-title fw-bold mt-1 mb-0"><%= item.brand %></h5>
+                                        <p class="card-text product-name"><%= item.name %>.</p>
+                                        <p> <b><span class="selling-price">Rs <%= item.sellingPrice %></span> </b> <s>Rs <%= item.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((item.actualPrice - item.sellingPrice) / item.actualPrice) * 100) %>%off)</span></p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5">
+                <div class="text-center">
+                    <h2 class="fw-bold">S H I R T S</h2>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row">
+                        <% shirts.forEach(item =>{  %>
+                            <div class="col-6 col-md-4 col-lg-3  ">
+                                <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
+                                    <a href="/product?id=<%= item._id %>">
+                                    <div>
+                                        <img src="/images/<%= item.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="card-title fw-bold mt-1 mb-0"><%= item.brand %></h5>
+                                        <p class="card-text product-name"><%= item.name %>.</p>
+                                        <p> <b><span class="selling-price">Rs <%= item.sellingPrice %></span> </b> <s>Rs <%= item.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((item.actualPrice - item.sellingPrice) / item.actualPrice) * 100) %>%off)</span></p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5">
+                <div class="text-center">
+                    <h2 class="fw-bold">T - S H I R T S</h2>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row">
+                        <% tshirts.forEach(item =>{  %>
+                            <div class="col-6 col-md-4 col-lg-3  ">
+                                <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
+                                    <a href="/product?id=<%= item._id %>">
+                                    <div>
+                                        <img src="/images/<%= item.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="card-title fw-bold mt-1 mb-0"><%= item.brand %></h5>
+                                        <p class="card-text product-name"><%= item.name %>.</p>
+                                        <p> <b><span class="selling-price">Rs <%= item.sellingPrice %></span> </b> <s>Rs <%= item.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((item.actualPrice - item.sellingPrice) / item.actualPrice) * 100) %>%off)</span></p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5">
+                <div class="text-center">
+                    <h2 class="fw-bold">C A P S</h2>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row">
+                        <% caps.forEach(item =>{  %>
+                            <div class="col-6 col-md-4 col-lg-3  ">
+                                <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
+                                    <a href="/product?id=<%= item._id %>">
+                                    <div>
+                                        <img src="/images/<%= item.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="card-title fw-bold mt-1 mb-0"><%= item.brand %></h5>
+                                        <p class="card-text product-name"><%= item.name %>.</p>
+                                        <p> <b><span class="selling-price">Rs <%= item.sellingPrice %></span> </b> <s>Rs <%= item.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((item.actualPrice - item.sellingPrice) / item.actualPrice) * 100) %>%off)</span></p></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/javascript/header.js"></script>
+    <script src="/javascript/slider.js"></script>
+<%- include('./foot.ejs') %>

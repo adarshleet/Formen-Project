@@ -1,0 +1,47 @@
+<style>
+  /* Add your CSS styles here */
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+  }
+  
+  .selected {
+    background-color: red;
+    color: white;
+  }
+</style>
+
+<!-- Your HTML code -->
+<form id="myForm" method="POST" action="your-backend-url">
+  <div id="buttonContainer">
+    <button type="button" class="button" data-value="value1" onclick="selectButton(1)">Button 1</button>
+    <button type="button" class="button" data-value="value2" onclick="selectButton(2)">Button 2</button>
+    <button type="button" class="button" data-value="value3" onclick="selectButton(3)">Button 3</button>
+  </div>
+  <input type="hidden" id="selectedValueInput" name="selectedValue">
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  let selectedButton = null;
+  const selectedValueInput = document.getElementById("selectedValueInput");
+
+  function selectButton(buttonIndex) {
+    const buttonContainer = document.getElementById("buttonContainer");
+    const buttons = buttonContainer.getElementsByClassName("button");
+
+    if (selectedButton !== null) {
+      selectedButton.classList.remove("selected");
+    }
+
+    selectedButton = buttons[buttonIndex - 1];
+    selectedButton.classList.add("selected");
+
+    const selectedValue = selectedButton.getAttribute("data-value");
+    selectedValueInput.value = selectedValue;
+  }
+</script>

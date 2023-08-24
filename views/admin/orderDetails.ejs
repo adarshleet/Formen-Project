@@ -1,0 +1,105 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/orderDetails.css">
+    <link rel="stylesheet" href="/css/popUp.css">
+    <title>Document</title>
+</head>
+<body>
+    <main class="row mx-2">
+        <%- include('./sideBar.ejs') %>
+        <div class="col-md-12" style="background-color: #F5F5F9;">
+            <div>
+                <h4 class="my-2">Order Details</h4>
+            </div>
+            <div>
+                <% orders.forEach(item=>{%>
+                <div class="p-3 mb-3 border border-secondary ">
+                    <div class="d-flex mb-1">
+                        <h6 class="me-4 fw-bold">User : <%= item.user.name %></h6>
+                        <h6 class="fw-bold">Order Id: <%= item._id %></h6>
+                    </div>
+                    <% item.orders.forEach(order =>{%>
+                    <div class="p-2 d-flex mb-2" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px ;height: 10rem;">
+                        <div style="width: 6.7rem;">
+                            <img class="img-fluid" src="/images/<%= order.product.images[0].filename %>" alt="">
+                        </div>
+                        <div class="ms-2" style="width: 25rem;">
+                            <h6> <%= order.product.brand %></h6>
+                            <p><%= order.product.name %><p>
+                            <div class="d-flex my-2">
+                                <p class="me-2"><b>Size : <%= order.size %></b></p>
+                                <p><b>Quantity : <%= order.count %></b></p>
+                            </div>
+                            <h5>Rs <%= order.product.sellingPrice %></h5>
+                            <div class="mt-1">
+                                <%const date = new Date(order.orderDate);%>
+                                <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                                const formattedDate = date.toLocaleDateString('en-US', options); %>
+                                <%let status
+                                switch (order.orderStatus) {
+                                   case 1: 
+                                       status = 'Confirmed'
+                                       break;
+                                   case 2:
+                                       status = 'Shipped'
+                                       break;
+                                   case 3:
+                                       status= 'Out for delivery'
+                                       break;
+                                   case 4:
+                                       status= 'Delivered'
+                                       break;
+                                   case 5:
+                                       status= 'Cancelled by User'
+                                       break;
+                                   case 6:
+                                       status= 'Cancelled by Admin'
+                                       break;            
+                                   default:
+                                       break;
+                               } %>
+                                <p><%=status %> on <%= formattedDate %></p>
+                            </div>
+                        </div>
+                        <div style="width: 20rem;">
+                            <h6><%= order.address.name %></h6>
+                            <p><%= order.address.address %>, <%= order.address.locality %></p>
+                            <p><%= order.address.district %>, <%= order.address.state %>-<%= order.address.pincode %></p>
+                            <p class="mt-1 mb-2"><b>Mobile : <%= order.address.mobile %></b></p>
+                            <p><b>Payment method : <%= order.paymentMethode %></b></p>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <button data-item-id="<%= order._id %>" data-action-do="2" class="btn btn-sm btn-secondary my-1 deleteButton" <% if(order.orderStatus >= 2){%>disabled<%} %>>Shipped</button>
+                            <button data-item-id="<%= order._id %>" data-action-do="3" class="btn btn-sm btn-secondary mb-1 deleteButton" <% if(order.orderStatus >= 3){%>disabled<%} %>>Out for delivery</button>
+                            <button data-item-id="<%= order._id %>" data-action-do="4" class="btn btn-sm btn-secondary mb-1 deleteButton" <% if(order.orderStatus >= 4){%>disabled<%} %>>Delivered</button>
+                            <button data-item-id="<%= order._id %>" data-action-do="6" class="btn btn-sm btn-danger deleteButton" <% if(order.orderStatus > 2){%>disabled<%} %>>Cancel Order</button>
+                        </div>
+                        
+                    </div>
+                    <%}) %>
+                </div>
+                <%}) %>
+            </div>
+            <div class="clearfix">
+                <div class="hint-text me-2">Showing <b><%= orders.length %></b> out of <b><%= orderCount %></b> entries </div>
+                    <ul class="pagination">
+                        <li class="page-item" <% if(currentPage==1){%> hidden<%} %>"><a href="?page=<%= currentPage-1 %>" class="page-link"><i class="fa fa-angle-double-left"></i></a></li>
+                        <% for(let i=1;i<=totalPages;i++){%>
+                        <li class="page-item<% if(i==currentPage){%> active<%} %>" "><a href="?page=<%= i %>" class="page-link"><%= i %></a></li>
+                        <%} %>
+                        <li class="page-item" <% if(currentPage==totalPages){%> hidden<%} %> "><a href="?page=<%= +currentPage+1 %>" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+                    </ul>
+            </div>
+        </div>
+        <div class="modal-container" id="modalContainer">
+            <div class="form-control modal-content text-center w-50">
+                <h6 class="py-4 border-bottom">Are you sure to change the order status?</h6>
+                <div class="d-flex justify-content-center mt-2">
+                    <button class="btn w-100 border-end" id="confirmButton"><h6>Confirm</h6></button>
+                    <button class="btn w-100" id="cancelButton"><h6>Cancel</h6></button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/orderStatusPopUp.js"></script>
+<%- include('./foot.ejs') %>

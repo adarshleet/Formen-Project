@@ -1,0 +1,113 @@
+<%- include('./head.ejs') %>
+</head>
+    <!-- <link rel="stylesheet" href="/css/address.css"> -->
+    <link rel="stylesheet" href="/css/checkBox.css">
+<body>
+    <%- include('./header.ejs') %>
+    <main class="container-md px-md-5">
+        <%- include('sideBar.ejs') %>
+        <%- include('./profileSide.ejs') %>
+                <div class="col-md-9 p-3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form class="main-form form-control py-4" id="emailForm" method="post" action="/profileEdit">
+                            <h5 class="login-title text-start ms-4 mb-5 fw-bold">EDIT PROFILE</h5>
+                            <div id="notification" class="notification"></div>
+                            <p class="text-center text-danger" id="result"></p>
+                            <div class="form-outline d-flex justify-content-between my-4 mx-3 py-2 px-3 w-90 border rounded-1">
+                                <p class="m-0"><%= user.mobile %> <i class="fa-sharp fa-solid fa-circle-check" style="color: #859390;"></i></p>
+                                <button class="btn btn-light border border-secondary btn-sm fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#numberChange"">CHANGE</button>
+                            </div>
+                            
+                            <div class="form-outline my-4 mx-3">
+                                <input type="text" name="name" value="<%= user.name %>" id="nameInput" placeholder="Name" class="form-control login-input">
+                            </div>
+
+                            <div class="form-outline my-4 mx-3">
+                                <input type="text" placeholder="Email" id="emailInput" value="<%= user.email %>" name="email" class="form-control login-input">
+                            </div>
+                            <div class="radio-container my-4 mx-3">
+                                <input type="radio" id="male" name="gender" value="Male" class="hidden-radio" <% if(user.gender === 'Male'){%>checked <%}%>>
+                                <label for="male" class="radio-box w-50">Male</label>
+                            
+                                <input type="radio" id="female" name="gender" value="Female" class="hidden-radio" <% if(user.gender === 'Female'){%>checked <%}%>>
+                                <label for="female" class="radio-box w-50">Female</label>
+                            </div>
+                        
+    
+                            <div class="d-grid gap-2 mx-3 my-2">
+                                <button class="btn com-buttons fw-bold py-2" type="submit">SAVE DETAILS</button>
+                                <button class="btn border border-secondary fw-bold"  type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >CHANGE PASSWORD</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- password change -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="myForm">
+                            <div class="form-outline mb-4 mx-3">
+                                <input type="password" name="currentPassword" id="currentPasswordInput" placeholder="Current Password" class="form-control login-input">
+                                <div id="passwordError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="text-danger text-center" id="warnings"></div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="password" name="password" id="passwordInput" placeholder="New Password" class="form-control login-input">
+                                <div id="passwordError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="password" name="confirmPassword" id="confirmPasswordInput" placeholder="Confirm New Password" class="form-control login-input">
+                                <div id="confirmPasswordError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="d-grid gap-2 mx-3">
+                                <button class="btn btn-secondary mt-2 fw-bold" id="changePassword" type="submit">SAVE</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+
+            <!-- mobile number change -->
+            <div class="modal fade" id="numberChange" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Change Mobile Number</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="changeMobileForm">
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="password" name="password" id="passwordInputMobile" placeholder="Enter Your Password" class="form-control">
+                                <div id="passwordError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="form-outline mb-3 mx-3">
+                                <input type="number" name="mobile" id="mobileInput" placeholder="Enter New Mobile Number" class="form-control">
+                                <div id="passwordError" class="text-nowrap text-center text-danger"></div>
+                            </div>
+                            <div class="text-danger text-center" id="warningsMobile"></div>
+                            <div class="d-grid gap-2 mx-3">
+                                <button class="btn btn-secondary mt-2 fw-bold" id="changeMobile" type="submit">SEND OTP</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/javascript/validateProfileEdit.js"></script>
+    <script src="/javascript/changePassword.js"></script>
+    <script src="/javascript/changeMobile.js"></script>
+    <script src="/javascript/header.js"></script>
+<%- include('./foot.ejs') %>

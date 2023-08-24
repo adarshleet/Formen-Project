@@ -1,0 +1,17 @@
+<!-- <h5 class="d-lg-block d-none">FILTERS</h5> -->
+<div class="col-md-3 d-lg-none sidebar sidebar-content">
+    <button class="close-sidebar-btn" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="d-flex icons justify-content-center mb-5 mt-4" style="color: #928787; font-size: 1.5rem;">
+        <a href="/profile"><h2 class=" mx-4"><i class="fa-solid fa-user"></i></h2></a>
+        <h2 class=" mx-4"><i class="fa-solid fa-heart" ></i></h2>
+        <a href="/cart"><h2 class=" mx-4"><i class="fa-sharp fa-solid fa-bag-shopping" ></i></h2></a>
+    </div>
+    <div class="mt-2 text-center" style="text-transform: uppercase; color: #605959;">
+        <a href="/shop"><h5 class="mb-3"><b>SHOP</b></p></h5></a>
+        <% category.forEach(category=>{ %>
+            <h5 class="mb-3"><b><%= category.category %></b></h5>
+        <% }) %>
+    </div>
+</div>

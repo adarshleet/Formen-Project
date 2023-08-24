@@ -1,0 +1,126 @@
+<div class="col-md-3 d-lg-none sidebar sidebar-content">
+    <button class="close-sidebar-btn" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="d-flex icons justify-content-center mb-3 mt-4" style="color: #928787; font-size: 1.5rem;">
+        <a href="/profile"><h2 class=" mx-4"><i class="fa-solid fa-user"></i></h2></a>
+        <h2 class=" mx-4"><i class="fa-solid fa-heart" ></i></h2>
+        <a href="/cart"><h2 class=" mx-4"><i class="fa-sharp fa-solid fa-bag-shopping position-relative" >
+            <% if(cartItems){%>
+                <span class="position-absolute top-0 start-75 p-2 translate-middle badge rounded-pill bg-secondary">
+                    <p><%= cartItems %></p>
+                </span>
+            <%} %>
+        </i></h2></a>
+    </div>
+    <div class="mt-2" style="text-transform: uppercase; color: #605959;">
+        <div class="mt-2" style="overflow: auto; height: 35rem;">
+            <form class="my-2">
+                <div class="border-bottom mb-2 px-3">
+                    <a href="/shop"><h5 class="mb-2"><b>SHOP</b></p></h5></a>
+                </div>
+               <div class="px-3 border-bottom">
+                    <h5 class="mb-2"><b>CATEGORIES</b></h5>
+                    <% category.forEach(category=>{ %>
+                        <div class="d-flex align-items-center mb-1">
+                            <input type="checkbox" <% if (categoryToFront.includes(category.category)) { %> checked <%}%> name="category[]" value="<%= category.category %>" >
+                            <h6 class="ms-1 text-capitalize"><%= category.category %></h6>
+                        </div>
+                    <% }) %>
+               </div>
+               <div class="px-3 border-bottom">
+                    <h5 class="mb-2"><b>BRANDS</b></h5>
+                    <% category[0].brand.forEach(brand=>{ %>
+                        <div class="d-flex align-items-center mb-1">
+                            <input type="checkbox" <% if (brandsToFront.includes(brand)) { %> checked <%}%> value="<%= brand %>" name="brand[]">
+                            <h6 class="ms-1"><%= brand %></h6>
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="px-3 border-bottom">
+                    <h5 class="mb-2"><b>PRICE</b></h5>
+                    <div class="d-flex align-items-center mb-1">
+                        <input type="checkbox" <% if (price.includes('500')) { %> checked <%}%>  value="500" name="price">
+                        <h6 class="ms-1">Below ₹500</h6>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <input type="checkbox" <% if (price.includes('1000')) { %> checked <%}%> value="1000" name="price">
+                        <h6 class="ms-1">₹500 to ₹1000</h6>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <input type="checkbox" <% if (price.includes('1500')) { %> checked <%}%> value="1500" name="price">
+                        <h6 class="ms-1">₹1001 to ₹1500</h6>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <input type="checkbox" <% if (price.includes('2000')) { %> checked <%}%> value="2000" name="price">
+                        <h6 class="ms-1">₹1501 to ₹2000</h6>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <input type="checkbox" <% if (price.includes('2500')) { %> checked <%}%> value="2500" name="price">
+                        <h6 class="ms-1">₹2001 to ₹2500</h6>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                        <input type="checkbox" <% if (price.includes('2501')) { %> checked <%}%> value="2501" name="price">
+                        <h6 class="ms-1">Above ₹2500</h6>
+                    </div>
+                </div>
+                <input type="text" value="<%= search %>" name="search" hidden>
+                <button class="btn btn-secondary w-100 fw-bold" type="submit">FILTER</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-2 d-lg-block d-none border-end">
+    <form class="my-2">
+        <div class="border-bottom mb-2 px-3">
+            <a href="/shop"><h5 class="mb-2"><b>SHOP</b></p></h5></a>
+        </div>
+       <div class="px-3 border-bottom">
+            <h5 class="mb-2"><b>CATEGORIES</b></h5>
+            <% category.forEach(category=>{ %>
+                <div class="d-flex align-items-center mb-1">
+                    <input type="checkbox" <% if (categoryToFront.includes(category.category)) { %> checked <%}%> name="category[]" value="<%= category.category %>" >
+                    <h6 class="ms-1 text-capitalize"><%= category.category %></h6>
+                </div>
+            <% }) %>
+       </div>
+       <div class="px-3 border-bottom">
+            <h5 class="mb-2"><b>BRANDS</b></h5>
+            <% category[0].brand.forEach(brand=>{ %>
+                <div class="d-flex align-items-center mb-1">
+                    <input type="checkbox" <% if (brandsToFront.includes(brand)) { %> checked <%}%> value="<%= brand %>" name="brand[]">
+                    <h6 class="ms-1"><%= brand %></h6>
+                </div>
+            <% }) %>
+        </div>
+        <div class="px-3 border-bottom">
+            <h5 class="mb-2"><b>PRICE</b></h5>
+            <div class="d-flex align-items-center mb-1">
+                <input type="checkbox" <% if (price.includes('500')) { %> checked <%}%>  value="500" name="price">
+                <h6 class="ms-1">Below ₹500</h6>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <input type="checkbox" <% if (price.includes('1000')) { %> checked <%}%> value="1000" name="price">
+                <h6 class="ms-1">₹500 to ₹1000</h6>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <input type="checkbox" <% if (price.includes('1500')) { %> checked <%}%> value="1500" name="price">
+                <h6 class="ms-1">₹1001 to ₹1500</h6>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <input type="checkbox" <% if (price.includes('2000')) { %> checked <%}%> value="2000" name="price">
+                <h6 class="ms-1">₹1501 to ₹2000</h6>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <input type="checkbox" <% if (price.includes('2500')) { %> checked <%}%> value="2500" name="price">
+                <h6 class="ms-1">₹2001 to ₹2500</h6>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <input type="checkbox" <% if (price.includes('2501')) { %> checked <%}%> value="2501" name="price">
+                <h6 class="ms-1">Above ₹2500</h6>
+            </div>
+        </div>
+        <input type="text" value="<%= search %>" name="search" hidden>
+        <button class="btn btn-secondary w-100 fw-bold" type="submit">FILTER</button>
+    </form>
+</div>

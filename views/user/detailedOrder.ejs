@@ -1,0 +1,128 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/detailedOrder.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <main class="container mt-5" style="min-height: 100vh;">
+        <%- include('./sideBar.ejs') %>
+        <div class="container-fluid">
+            <div class="row p-2 border border-secondary">
+               <div class="col-md-4 py-4">
+                    <h6 class="fw-bold mb-2">Delivey Address</h6>
+                    <p class="fw-bold"><%= order.address.name %></p>
+                    <p><%= order.address.address %>, <%= order.address.locality %></p>
+                    <p><%= order.address.district %>, <%= order.address.state %>-<%= order.address.pincode %></p>
+                    <p class="fw-bold mt-2">Mobile Number : <%= order.address.mobile %></p>
+               </div>
+               <div class="col-md-4 py-4">
+                    <div>
+                        <h6 class="fw-bold">Coupons Used</h6>
+                        <% if(usedCoupon != undefined){%>
+                        <div class="border p-3 mt-1 mb-2 w-75" style="background-color: antiquewhite;">
+                            <h6><b><%= usedCoupon.couponName %></b></h6>
+                            <p>You saved ₹<%= usedCoupon.maximumDiscount %> on this order</p>
+                        </div>
+                        <%}else{%>
+                            <p>No coupons applied</p>
+                        <%} %>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold">Wallet amount used ₹<%= order.walletUsed %></h6>
+                    </div>
+               </div>
+               <div class="col-md-4 py-4">
+                    <h6 class="fw-bold">More actions</h6>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p><i class="fa-solid fa-file-invoice" style="color: #677472;"></i> Download Invoice</p>
+                        <button class="btn btn-sm btn-secondary px-3 fw-bold">Download</button>
+                    </div>
+               </div>
+            </div>
+            <div class="row p-2 mt-4 border border-secondary">
+                <div class="col-md-4 d-flex px-0 py-4">
+                    <div class="me-2 img-fluid" >
+                        <a href="/product?id=<%= order.product._id %>"><img class="img-fluid" style="height: 10rem;" src="/images/<%= order.product.images[0].filename %>" alt=""></a>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold"><%= order.product.brand %></h6>
+                        <p><%= order.product.name %></p>
+                        <div class="d-flex fw-bold">
+                            <p class="me-2">Size : <%= order.size %></p>
+                            <p>Quantity : <%= order.count %></p>
+                        </div>
+                        <% if(order.price === 0){%>
+                            <h5><b>Rs <%=order.walletUsed%></b></h5>
+                        <%}else{%>   
+                            <h5><b>Rs <%=order.price - order.walletUsed%></b></h5>
+                        <%} %>    
+                    </div>
+                </div>
+                <div class="row col-md-5 img-fluid align-items-center py-4">
+                    <div class="col-md-12 col-12">
+                        <div>
+                            <div class="mt-1">
+                                <%const date = new Date(order.orderDate);%>
+                                <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                                const formattedDate = date.toLocaleDateString('en-US', options); %>
+                                <%let status,barStatus
+                                switch (order.orderStatus) {
+                                   case 1: 
+                                       status = 'Confirmed'
+                                       barStatus = 'fill-1'
+                                       break;
+                                   case 2:
+                                       status = 'Shipped'
+                                       barStatus = 'fill-2'
+                                       break;
+                                   case 3:
+                                       status= 'Out for delivery'
+                                       barStatus = 'fill-3'
+                                       break;
+                                   case 4:
+                                       status= 'Delivered'
+                                       barStatus = 'fill-4'
+                                       break;
+                                   case 5:
+                                       status= 'Cancelled'
+                                       break;
+                                   case 6:
+                                       status= 'Cancelled by Admin'
+                                       break;            
+                                   default:
+                                       break;
+                               } %>
+                                
+                            </div>
+                            <% if(order.orderStatus < 5){%>
+                            <div class="d-flex justify-content-between order-status-text">
+                                <p <%if(order.orderStatus >= 1){%>class="fw-bold"<%} %>>Confirmed</p>
+                                <p <%if(order.orderStatus >= 2){%>class="fw-bold"<%} %>>Shipped</p>
+                                <p <%if(order.orderStatus >= 3){%>class="fw-bold"<%} %>>Out for delivery</p>
+                                <p <%if(order.orderStatus >= 4){%>class="fw-bold"<%} %>>Delivered</p>
+                            </div>
+                            <div class="d-flex justify-content-center my-1 px-4">
+                                <div class="container-new w-100">
+                                    <div class="filling-div <%= barStatus %>"></div>
+                                </div>
+                            </div>
+                            <%} %>
+                            <div class="d-flex justify-content-center order-status-text fw-bold">
+                                <h6 class="fw-bold <% if(order.orderStatus >= 5){%>text-danger<%} %>"><%=status %> on <%= formattedDate %></h6>
+                            </div>
+                        </div>
+                        <% if(order.orderStatus < 5){%>
+                        <div class="d-flex justify-content-center mt-2 fw-bold">
+                            <p>Payment Type : <%= order.paymentMethode  %></p>
+                        </div>
+                        <%} %>
+                    </div>
+                </div>
+                <div class="row col-md-3 align-items-center text-center py-4">
+                    <p class="fw-bold"><i class="fa-solid fa-star" style="color: #b0b0b0;"></i> Rate & Review Product</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <%- include('./footer.ejs') %>
+<%- include('./foot.ejs') %>

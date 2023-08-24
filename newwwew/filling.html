@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Div Left-to-Right Filling Effect</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 500px;
+      height: 8px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filling-div {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: #ee6969; /* Set the color for the filling effect */
+      animation: fillEffect 2.5s linear forwards; /* Animation to fill the div over 5 seconds */
+    }
+
+    @keyframes fillEffect {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 25%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="filling-div"></div>
+  </div>
+</body>
+</html>

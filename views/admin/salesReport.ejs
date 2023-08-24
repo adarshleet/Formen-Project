@@ -1,0 +1,97 @@
+<%- include('./head.ejs') %>
+    <title>Document</title>
+    <style>
+        body{
+            padding: 0 !important;
+        }
+
+        @media print {
+            #printButton {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container-fluid my-2">
+        <div>
+            <div class="table-wrapper for-box mb-2">
+                <div class="table-title py-3">
+                    <h1 class="text-center">SALES REPORT</h1>
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <%const startingDate = new Date(startDate);%>
+                            <%const optionsStartDate = { month: 'short', day: 'numeric', year: 'numeric' };
+                            const saleStartingDate = startingDate.toLocaleDateString('en-US', optionsStartDate); %>
+                            <h5 class="mx-2 fw-bold">From : <%= saleStartingDate %></h5>
+                        </div>
+                        <div>
+                            <%const date = new Date(endDate);%>
+                            <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                            const formattedDate = date.toLocaleDateString('en-US', options); %>
+                            <h5 class="mx-2 fw-bold">To : <%= formattedDate %></h5>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary ms-2 fw-bold" id="printButton">PRINT REPORT</button>
+                </div>
+                <div class="table-responsive">
+                    <% if(sales.length>0) {%>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</i></th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Order Id</th>
+                                    <th>Category</th>
+                                    <th>Payment Method</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%sales.forEach(sale=>{%>
+                                    <tr>
+                                        <td>
+                                            <%= sales.indexOf(sale)+1 %>
+                                        </td>
+                                        <td>
+                                            <%const date = new Date(sale.date);%>
+                                            <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                                            const formattedDate = date.toLocaleDateString('en-US', options); %>
+                                            <%=formattedDate%>
+                                        </td>
+                                        <td>
+                                            <%=sale.userName%>
+                                        </td>
+                                        <td>
+                                            <%=sale._id.toString()%>
+                                        </td>
+                                        <td>
+                                            <%=sale.category%>
+                                        </td>
+                                        <td>
+                                            <%=sale.paymentMethod%>
+                                        </td>
+                                        <td>
+                                            ₹<%=sale.amount%>
+                                        </td>
+                                    </tr>
+                                <%} )%>
+                            </tbody>
+                        </table>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Get the print button element
+            const printButton = document.getElementById('printButton');
+
+            // Add a click event listener to the print button
+            printButton.addEventListener('click', () => {
+            // Call the browser's print function
+            window.print();
+            });
+        </script>
+    </main>
+<%- include('./foot.ejs') %>

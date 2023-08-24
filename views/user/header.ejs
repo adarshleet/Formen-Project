@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/header.css">
+
+<header>
+    <nav class="navbar py-0 d-flex justify-content-between px-lg-5 navbar-expand-lg navbar-light bg-light" style="box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.25);">
+  
+        <div class="d-flex align-items-center w-100 justify-content-between justify-content-lg-start">
+            
+            <a href="/"><img class="img-fluid" style="width: 8rem;" src="/images/FORMEN_LOGO.png" alt=""></a>
+            <div class="d-flex align-items-center justify-content-between d-lg-flex d-none ms-2">
+                <div class="d-flex">
+                    <a href="/shop"><h5 class="p-3">SHOP</h5></a>
+                    <a href="/shop?category=jeans"><h5 class="p-3">JEANS</h5></a>
+                    <a href="/shop?category=shirt"><h5 class="p-3">SHIRT</h5></a>
+                    <a href="/shop?category=t-shirt"><h5 class="p-3">T-SHIRT</h5></a>
+                    <a href="/shop?category=cap"><h5 class="p-3">CAP</h5></a>
+                </div>
+            </div>
+            <form class="d-flex w-50 justify-content-center" method="get" action="/shop">
+                <input class="search-input w-75 p-2" placeholder="Seach Products" type="text" name="search">
+                <button class="btn search-button" type="submit"><i class="fa fa-thin fa-magnifying-glass"></i></button>
+            </form>
+            <button class="navbar-toggler sidebar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="d-flex icons d-lg-flex d-none">
+            <a href="/profile"><h2 class="p-3 mx-3 nav-icon"><i class="fa-solid fa-user"></i></h2></a>
+            <a href="/wishlist"><h2 class="p-3 mx-3 nav-icon"><i class="fa-solid fa-heart"></i></h2></a>
+            <a href="/cart">
+                <h2 class="p-3 mx-3 nav-icon">
+                    <i class="fa-sharp fa-solid fa-bag-shopping position-relative">
+                        <% if(cartItems){%>
+                            <span class="position-absolute top-0 start-75 p-2 translate-middle badge rounded-pill bg-secondary">
+                                <p><%= cartItems %></p>
+                            </span>
+                        <%} %>
+                    </i></h2></a>
+        </div>
+    </nav>
+</header>

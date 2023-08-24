@@ -1,0 +1,141 @@
+<%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/css/products.css">
+    </head>
+
+    <body>
+        <main class="row mx-2">
+            <%- include('./sideBar.ejs') %>
+                <div class="col-md-12" style="background-color: #F5F5F9;">
+                    <div class="container mt-4">
+                        <div class="table-wrapper for-box mb-2">
+                            <div class="table-title">
+                                <h1 class="text-center">Coupons</h1>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4">
+                                        <form class="search-box d-flex">
+                                            <input type="text" name="search" class="form-control d-inline"
+                                                placeholder="Enter the name">
+                                            <button class="btn btn-light d-inline" type="submit">Search</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="text-center text-danger">
+                                    <%=locals.context?context:'' %>
+                                </h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</i></th>
+                                            <th>Coupon Name</th>
+                                            <th>Minimum Purchase</th>
+                                            <th>Maximum Discount</th>
+                                            <th>Last Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <% coupon.forEach(item =>{%>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <%= coupon.indexOf(item)+1 %>
+                                            </td>
+                                            <td>
+                                                <%= item.couponName %>
+                                            </td>
+                                            <td>
+                                                <%= item.minimumPurchase%>
+                                            </td>
+                                            <td>
+                                                <%= item.maximumDiscount %>
+                                            </td>
+                                            <%const date = new Date(item.lastDate);%>
+                                            <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
+                                            const formattedDate = date.toLocaleDateString('en-US', options); %>
+                                            <td>
+                                                <%= formattedDate %>
+                                            </td>
+                                            <td>
+                                                <a href="/admin/coupons/edit_coupon/<%= item._id %>" class="btn btn-sm btn-primary"
+                                                    title="Edit">Edit</a>
+                                                <a href="/admin/hideCoupon/<%= item._id %>" onclick="return confirm('Are you sure you want to hide/show this item?')" class="btn btn-sm btn-primary <%= item.showStatus ? 'btn-primary' : 'btn-danger' %> delete" title="Delete"><%= item.showStatus ? 'Hide' : 'Unhide' %></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <%}) %>   
+                                </table>
+                            
+                            </div>
+                        </div>
+                        <div class="product-edit-buttons">
+
+                            <!-- model for add products -->
+                            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary">Add Coupon</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Add Coupons</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form class="mx-1 my-4 mx-md-4" id="signup-form" method="post" action="/admin/coupons/add_coupon">
+                                                <div class="d-flex flex-row align-items-center mb-3">
+                                                    <div class="form-outline flex-fill mb-0">
+                                                        <label class="sign-form-label" for="form3Example1c">Coupon
+                                                            Name</label>
+                                                        <input type="text" name="couponName" id="form3Example1c"
+                                                            class="form-control" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex flex-row align-items-center mb-3">
+                                                    <div class="form-outline flex-fill mb-0">
+                                                        <label class="sign-form-label" for="form3Example4cd">Minimum
+                                                            Purchase</label>
+                                                        <input type="number" min="0" name="minPurchase"
+                                                            class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center mb-3">
+                                                    <div class="form-outline flex-fill mb-0">
+                                                        <label class="sign-form-label" for="form3Example4cd">Maximum
+                                                            Discount</label>
+                                                        <input type="number" min="0" name="maxDiscount"
+                                                            class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center mb-3">
+                                                    <div class="form-outline flex-fill mb-0">
+                                                        <label class="sign-form-label" for="form3Example4cd">Last
+                                                            Date</label>
+                                                        <input type="date" min="0" name="date" class="form-control" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 mt-4 mb-lg-4 d-grid gap-2">
+                                                    <button type="submit" id="submitButton"
+                                                        class="btn btn-primary btn-lg">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="/javascript/editProduct.js"></script>
+        <script src="/javascript/categorySelect.js"></script>
+        <%- include('./foot.ejs') %>

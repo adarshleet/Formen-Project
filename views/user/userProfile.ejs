@@ -1,0 +1,49 @@
+<%- include('./head.ejs') %>
+</head>
+<body>
+    <%- include('./header.ejs') %>
+    <main class="container-md px-md-5" style="min-height: 100vh;">
+        <%- include('sideBar.ejs') %>
+        <%- include('./profileSide.ejs') %>
+                <div class="col-md-9 p-3">
+                    <div class="p-5 border text-center">
+                        <div class="mb-5">
+                            <h4>Profile Details</h4>
+                        </div>
+                        <div class="px-md-5">
+                            <div class="d-flex w-100 justify-content-between mb-4">
+                                <p>FullName</p>
+                                <p><%= user.name %></p>
+                            </div>
+                            <div class="d-flex w-100 justify-content-between mb-4">
+                                <p>Mobile</p>
+                                <p><%= user.mobile %></p>
+                            </div>
+                            <div class="d-flex w-100 justify-content-between mb-4">
+                                <p>Email</p>
+                                <% if (user.email == undefined){%>
+                                    <p>- Not added -</p>
+                                <%}else{%>
+                                    <p><%= user.email %></p>
+                                <%} %>
+                            </div>
+                            <div class="d-flex w-100 justify-content-between mb-4">
+                                <p>Gender</p>
+                                <% if (user.gender == undefined){%>
+                                    <p>- Not added -</p>
+                                <%}else{%>
+                                    <p><%= user.gender %></p>
+                                <%} %>
+                            </div>
+                            <div class="mt-5">
+                                <a href="/profile/edit" class="btn btn-primary px-5">EDIT DETAILS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <%- include('./footer.ejs') %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/javascript/header.js"></script>
+<%- include('./foot.ejs') %>
