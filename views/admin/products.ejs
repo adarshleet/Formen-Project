@@ -115,13 +115,14 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form class="mx-1 my-4 mx-md-4 d-flex flex-row" method="post"
+                                            <div id="error" class="px-2 my-2 text-center text-danger"></div>
+                                            <form class="mx-1 my-4 mx-md-4 d-flex flex-row" id="categoryForm" method="post"
                                                 action="/admin/products/add_category">
                                                 <div class="d-flex flex-row align-items-center mb-3">
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example1c">Add new
                                                             category</label>
-                                                        <input type="text" name="category" id="form3Example1c"
+                                                        <input type="text" name="category" id="categoryInput"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -130,13 +131,13 @@
                                                         class="btn btn-primary mt-4">Add Category</button>
                                                 </div>
                                             </form>
-                                            <form class="mx-1 my-4 mx-md-4" method="post"
+                                            <form class="mx-1 my-4 mx-md-4" method="post" id="brandForm"
                                                 action="/admin/products/add_brand">
                                                 <div class="d-flex">
                                                     <div class="d-flex flex-column">
                                                         <label class="sign-form-label d-flex"
                                                             for="form3Example1c">Category</label>
-                                                        <select class="form-select align-items-center mb-3"
+                                                        <select class="form-select align-items-center mb-3" id="categorySelectBrand"
                                                             name="category" aria-label="Default select example">
                                                             <option selected>Select Category</option>
                                                             <%category.forEach(category=> {%>
@@ -149,7 +150,7 @@
                                                     <div class="d-flex flex-column ms-5">
                                                         <label class="sign-form-label"
                                                             for="form3Example4cd">Brand</label>
-                                                        <input type="text" name="brand" class="form-control" />
+                                                        <input type="text" name="brand" id="brandInput" class="form-control" />
                                                     </div>
                                                     <div class="d-flex flex-column ms-5">
                                                         <button type="submit" id="submitButton"
@@ -157,13 +158,13 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <form class="mx-1 my-4 mx-md-4" method="post"
+                                            <form class="mx-1 my-4 mx-md-4" method="post" id="sizeForm"
                                                 action="/admin/products/add_size">
                                                 <div class="d-flex">
                                                     <div class="d-flex flex-column">
                                                         <label class="sign-form-label d-flex"
                                                             for="form3Example1c">Category</label>
-                                                        <select class="form-select align-items-center mb-3"
+                                                        <select class="form-select align-items-center mb-3" id="categorySelectSize"
                                                             name="category" aria-label="Default select example">
                                                             <option selected>Select Category</option>
                                                             <%category.forEach(category=> {%>
@@ -176,7 +177,7 @@
                                                     <div class="d-flex flex-column ms-5">
                                                         <label class="sign-form-label"
                                                             for="form3Example4cd">Size</label>
-                                                        <input type="text" name="size" class="form-control" />
+                                                        <input type="text" name="size" id="sizeInput" class="form-control" />
                                                     </div>
                                                     <div class="d-flex flex-column ms-5">
                                                         <button type="submit" id="submitButton"
@@ -205,13 +206,13 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form class="mx-1 my-4 mx-md-4" id="signup-form" method="post"
+                                            <form class="mx-1 my-4 mx-md-4" id="productForm" method="post"
                                                 action="/admin/products/add_product" enctype="multipart/form-data">
                                                 <div class="d-flex flex-row align-items-center mb-3">
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example1c">Product
                                                             Name</label>
-                                                        <input type="text" name="name" id="form3Example1c"
+                                                        <input type="text" name="name" id="productName"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -249,14 +250,14 @@
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label"
                                                             for="form3Example4cd">Cost</label>
-                                                        <input type="number" min="0" name="cost" class="form-control" />
+                                                        <input type="number" name="cost" class="form-control" id="costInput" />
                                                     </div>
                                                 </div>
                                                 <div class="d-flex flex-row align-items-center mb-3">
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example4cd">Selling
                                                             Price</label>
-                                                        <input type="number" min="0" name="sellingPrice"
+                                                        <input type="number" name="sellingPrice" id="sellingPriceInput"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -264,7 +265,7 @@
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example4cd">Actual
                                                             Price</label>
-                                                        <input type="number" min="0" name="actualPrice"
+                                                        <input type="number" min="0" name="actualPrice" id="actualPriceInput"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -272,7 +273,7 @@
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label"
                                                             for="form3Example4cd">Stock</label>
-                                                        <input type="number" min="0" name="stock"
+                                                        <input type="number" min="0" name="stock" id="stockInput"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -280,7 +281,7 @@
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example4cd">product
                                                             description</label>
-                                                        <textarea type="text" name="description" style="resize: none;"
+                                                        <textarea type="text" name="description" id="productDescriptionInput" style="resize: none;"
                                                             class="form-control" cols="30" rows="5"></textarea>
                                                     </div>
                                                 </div>
@@ -310,6 +311,7 @@
                                                         <input type="file" name="image">
                                                     </div>
                                                 </div>
+                                                <div id="productError" class="px-2 my-2 text-center text-danger"></div>
                                                 <div class="mb-3 mt-4 mb-lg-4 d-grid gap-2">
                                                     <button type="submit" id="submitButton"
                                                         class="btn btn-primary btn-lg">Save</button>
@@ -326,6 +328,8 @@
         </main>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="/javascript/validateCategory.js"></script>
+        <script src="/javascript/validateProduct.js"></script>
         <script src="/javascript/editProduct.js"></script>
         <script src="/javascript/categorySelect.js"></script>
         <script src="/javascript/searchProducts.js"></script>

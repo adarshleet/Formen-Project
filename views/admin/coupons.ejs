@@ -86,12 +86,13 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form class="mx-1 my-4 mx-md-4" id="signup-form" method="post" action="/admin/coupons/add_coupon">
+                                            <div id="error" class="px-2 my-2 text-center text-danger"></div>
+                                            <form class="mx-1 my-4 mx-md-4" id="couponForm" method="post" action="/admin/coupons/add_coupon">
                                                 <div class="d-flex flex-row align-items-center mb-3">
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example1c">Coupon
                                                             Name</label>
-                                                        <input type="text" name="couponName" id="form3Example1c"
+                                                        <input type="text" name="couponName" id="couponName"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -100,7 +101,7 @@
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example4cd">Minimum
                                                             Purchase</label>
-                                                        <input type="number" min="0" name="minPurchase"
+                                                        <input type="number" id="minimumPurchase" name="minPurchase"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -108,7 +109,7 @@
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example4cd">Maximum
                                                             Discount</label>
-                                                        <input type="number" min="0" name="maxDiscount"
+                                                        <input type="number" id="maximumDiscount" name="maxDiscount"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -116,7 +117,7 @@
                                                     <div class="form-outline flex-fill mb-0">
                                                         <label class="sign-form-label" for="form3Example4cd">Last
                                                             Date</label>
-                                                        <input type="date" min="0" name="date" class="form-control" />
+                                                        <input type="date" id="couponLastDate" name="date" class="form-control" />
                                                     </div>
                                                 </div>
 
@@ -136,6 +137,5 @@
         </main>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script src="/javascript/editProduct.js"></script>
-        <script src="/javascript/categorySelect.js"></script>
+        <script src="/javascript/validateCoupon.js"></script>
         <%- include('./foot.ejs') %>

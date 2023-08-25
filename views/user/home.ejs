@@ -7,7 +7,7 @@
         <div>
             <%- include('sideBar.ejs') %>
             <div class="slider">
-                <% banner.images.forEach(image =>{%>
+                <% banner?.images.forEach(image =>{%>
                     <div class="slide active">
                         <img class="img-fluid" src="/images/<%= image.filename %>" alt="">
                     </div>

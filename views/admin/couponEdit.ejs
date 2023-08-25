@@ -10,7 +10,7 @@
     <body>
         <main class="container">
             <div class="container">
-                <form class="mx-1 my-4 mx-md-4 form-control p-3" id="signup-form" method="post" action="/admin/couponEdit">
+                <form class="mx-1 my-4 mx-md-4 form-control p-3" id="couponForm" method="post" action="/admin/couponEdit">
                     <div class="mb-4">
                         <h5 class="fw-bold">Edit Coupon details</h5>
                     </div>
@@ -18,7 +18,7 @@
                         <div class="form-outline flex-fill mb-0">
                             <label class="sign-form-label" for="form3Example1c">Coupon
                                 Name</label>
-                            <input type="text" name="couponName" value="<%= coupon.couponName %>" id="form3Example1c"
+                            <input type="text" name="couponName" value="<%= coupon.couponName %>" id="couponName"
                                 class="form-control" />
                         </div>
                     </div>
@@ -47,12 +47,13 @@
                             <input type="text" name="coupon_id" value="<%= coupon._id %>" hidden>
                         </div>
                     </div>
-                    
+                    <div id="error" class="px-2 my-2 text-center text-danger"></div>
                     <div class="mb-3 mt-4 mb-lg-4 d-grid gap-2">
-                        <button type="submit" id="submitButton"
+                        <button type="submit"
                             class="btn btn-primary btn-lg">Save</button>
                     </div>
                 </form>
             </div>
         </main>
+        <script src="/javascript/validateCouponCopy.js"></script>
 <%- include('./foot.ejs') %>

@@ -1,5 +1,4 @@
 
-console.log('hii');
 
   const addressForm = document.getElementById("addressForm");
   const mobileInput = document.getElementById("mobileInput");

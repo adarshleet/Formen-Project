@@ -27,6 +27,9 @@ $(document).ready(function() {
           else if(formData.password.length <8){
             $('#warnings').text('Password length minimum 8 characters');
           }
+          else if(!validateStrongPassword(formData.password)){
+            $('#warnings').text("Password must contain at least one symbol, one number, one uppercase letter, and one lowercase letter.");
+          }
           else if(response.status == 'done'){
             $('#staticBackdrop').modal('hide');
             // $('#changed').text('Password Changed successfully')
@@ -40,6 +43,11 @@ $(document).ready(function() {
               notification.style.right = '-250px';
             }, 3000);
 
+        }
+        //password strong
+        function validateStrongPassword(password){
+          const pattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
+          return pattern.test(password);
         }
         },
         error: function(error) {

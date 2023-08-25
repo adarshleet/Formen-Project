@@ -9,7 +9,7 @@
                 <%- include('sideBar.ejs') %>
                 <div class="row justify-content-center col-sm-6 text-center text-black">
                     <div class="d-flex align-items-center justify-content-center">
-                        <form class="main-form form-control p-0" action="/login" method="post" style="width: 21rem;">
+                        <form class="main-form form-control p-0" action="/login" id="loginForm" method="post" style="width: 21rem;">
                             <div class="login-banner mb-4">
                                 <img class="img-fluid" src="/images/loginBanner.png" alt="">
                             </div>
@@ -22,6 +22,7 @@
                             <div class="form-outline mb-2 mx-3">
                                 <input type="password" id="passwordInput" name="password" placeholder="Password" class="form-control login-input">
                             </div>
+                            <div id="Error" class="px-2 text-center text-danger"></div>
                             <div class="d-grid gap-2 mx-3">
                                 <button class="btn login-btn mt-2" type="submit">Login</button>
                             </div>
@@ -33,7 +34,7 @@
             </div>
         </div>
     </section>
-    <script src="/javascript/Validate.js"></script>
+    <script src="/javascript/validateLogin.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="/javascript/header.js"></script>
 <%- include('./foot.ejs') %>

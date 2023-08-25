@@ -1,70 +1,50 @@
 // Get the data from input field
 const mobileInput = document.getElementById('mobileInput');
-const mobileError = document.getElementById('mobileError');
 const passwordInput = document.getElementById('passwordInput');
-const submitButton = document.getElementById('submitButton');
 const confirmPasswordInput = document.getElementById('confirmPasswordInput');
-const passwordError = document.getElementById('passwordError');
-const confirmPasswordError = document.getElementById('confirmPasswordError');
-const nameInput = document.getElementById('usernameInput');
+const Error = document.getElementById('Error');
+const nameInput = document.getElementById('nameInput');
+const signupForm = document.getElementById("signup-form")
 
 
 
-//name check 
-mobileInput.addEventListener('focus',function() {
+signupForm.addEventListener("submit", function(event) {
     const name = nameInput.value;
+    const mobile = mobileInput.value
+    const password = passwordInput.value
+    const confirmPassword = confirmPasswordInput.value
 
     if(name.length < 3){
-        // event.preventDefault(); // Prevent form submission
-        submitButton.disabled = true; // Disable the submit button
-        nameError.textContent = 'Enter Your Fullname';
+        event.preventDefault(); // Prevent form submission
+        Error.textContent = 'Enter Your Fullname';
     }
-    else{
-        submitButton.disabled = false; // Disable the submit button
-        nameError.textContent = '';
+    else if (!validateMobileNumber(mobile)) {
+        event.preventDefault(); // Prevent form submission
+        Error.textContent = 'Please enter a valid 10-digit mobile number';
     }
+    else if(password.length < 8 ){
+        event.preventDefault(); // Prevent form submission
+        Error.textContent = 'Password must be at least 8 characters long';
+    } 
+    else if(!validateStrongPassword(password)){
+        event.preventDefault(); // Prevent form submission
+        Error.textContent = "Password must contain at least one symbol, one number, one uppercase letter, and one lowercase letter."
+    }
+    else if(password !== confirmPassword || confirmPassword.length < 8) {
+        event.preventDefault(); // Prevent form submission
+        Error.textContent = 'Passwords do not match';
+    } 
+    
 })
 
-
-// Add event listener to password input field - password check
-passwordInput.addEventListener('focus', function() {
-    const mobileNumber = mobileInput.value;
-
-    if (!validateMobileNumber(mobileNumber)) {
-        mobileError.textContent = 'Please enter a valid 10-digit mobile number';
-        submitButton.disabled = true; // Disable the submit button
-    } else {
-        mobileError.textContent = '';
-        submitButton.disabled = false; // Enable the submit button
-    }
-
-});
-
-
 // Mobile number validation function - mobile number chehck
-function validateMobileNumber(mobileNumber) {
+function validateMobileNumber(mobile) {
     const mobileRegex = /^\d{10}$/; // Matches exactly 10 digits
-    return mobileRegex.test(mobileNumber);
+    return mobileRegex.test(mobile);
 }
 
-// Add event listener to the form submit event
-document.getElementById('signup-form').addEventListener('submit', function(event) {
-    const password = passwordInput.value;
-    const confirmPassword = confirmPasswordInput.value;
-
-    if(password.length < 8 ){
-        passwordError.textContent = 'Password must be at least 8 characters long';
-        event.preventDefault(); // Prevent form submission
-    } 
-    else{
-        passwordError.textContent = '';
-    }
-
-    if(password !== confirmPassword) {
-        confirmPasswordError.textContent = 'Passwords do not match';
-        event.preventDefault(); // Prevent form submission
-    } 
-    else{
-        confirmPasswordError.textContent = '';
-    }
-});
+//password strong
+function validateStrongPassword(password){
+    const pattern = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
+    return pattern.test(password);
+}

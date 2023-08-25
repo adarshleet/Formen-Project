@@ -830,7 +830,7 @@ exports.salesReport = async (req,res,next) =>{
         }
       ]);
 
-        res.render('admin/salesReport.ejs',{sales,startDate,endDate})
+        res.render('admin/salesReport.ejs',{sales,startDate,endDate,title:'Sales Report'})
     } catch (error) {
         next(error)
     }
