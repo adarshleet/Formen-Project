@@ -327,7 +327,7 @@ exports.contactForm = async (req,res,next) =>{
     try {
         var context = req.app.locals.specialContext;
         req.app.locals.specialContext = null;
-        res.render("user/contactAdmin",{title:"Contact-Form",context})
+        res.render("user/contactAdmin",{title:"Contact-Form",context});
     } catch (error) {
         next(error)
     }
