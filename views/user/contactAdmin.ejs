@@ -1,0 +1,36 @@
+<%- include('./head.ejs') %>
+<link rel="stylesheet" href="/css/otp.css">
+</head>
+<body>
+    <section class="row justify-content-center align-items-center mx-4" style="height: 86vh;">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="row justify-content-center col-sm-6 text-center text-black">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <form class="main-form form-control py-4 px-2" action="/send-mail" method="post" id="contactForm" style="width: 25rem;">
+                            <h4 class="login-title text-center">Contact Admin</h4>
+                            <h6 class="text-center text-danger"><%=locals.context?context:'' %></h6>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="text" name="name" placeholder="Name" id="userName" class="form-control login-input">
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="number" name="mobile" placeholder="Registered mobile" id="userMobile" class="form-control login-input">
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <input type="text" name="email" placeholder="Email" id="userEmail" class="form-control login-input">
+                            </div>
+                            <div class="form-outline mb-2 mx-3">
+                                <textarea name="message" id="messageToAdmin" cols="30" rows="5" placeholder="Message" class="form-control login-input"></textarea>
+                            </div>
+                            <div id="formError" class="px-2 text-center text-danger"></div>
+                            <div class="mx-3 mt-3">
+                                <button class="btn btn-secondary fw-bold w-100" type="submit">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/javascript/validateContactForm.js"></script>
+<%- include('./foot.ejs') %>

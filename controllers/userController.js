@@ -10,8 +10,11 @@ const bcrypt = require('bcrypt');
 const accountSID = process.env.ACC_SID;
 const authToken = process.env.AUTH_TOKEN;
 const serviceID = process.env.SERVICE_ID;
+const node_pass = process.env.NODE_PASS
+const contact_mail = process.env.CONTACT_MAIL
 const client = require('twilio')(accountSID,authToken);
 const Category = require('../models/categoryModel');
+const nodemailer = require('nodemailer')
 
 
 
@@ -318,6 +321,57 @@ exports.Home = async (req,res,next) =>{
     }
 }
 
+
+//contact form
+exports.contactForm = async (req,res,next) =>{
+    try {
+        var context = req.app.locals.specialContext;
+        req.app.locals.specialContext = null;
+        res.render("user/contactAdmin",{title:"Contact-Form",context})
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.contactAdmin = async (req,res) =>{
+    try {
+        const {name,email,mobile,message} = req.body
+        console.log(name,email,mobile,message);
+
+        const contactMail = (name, email, message,mobile) => {
+            const mailTransporter = nodemailer.createTransport({
+              service: "gmail",
+              auth: {
+                user: "adarshravi0111@gmail.com",
+                pass: node_pass,
+              },
+            });
+          
+          
+            const mailOptions = {
+              from: "adarshravi0111@gmail.com",
+              to: contact_mail,
+              subject: "Formen Contact",
+              text: `Name : ${name} \nEmail : ${email} \nMobile : ${mobile}.\nMessage : ${message}`,
+            };
+          
+            mailTransporter.sendMail(mailOptions, (err) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("Message sent successfully");
+                req.app.locals.specialContext = 'Message Sent Successfully';
+                res.redirect('/contact-us')
+              }
+            });
+          };
+
+          contactMail(name,email,message,mobile)
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 
 //USER PROFILE

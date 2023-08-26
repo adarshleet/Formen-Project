@@ -43,6 +43,13 @@ userRoute.get('/shop',productController.allProducts);
 userRoute.get('/product',productController.singleProduct);
 
 
+//contact admin
+userRoute.get('/contact-us',userController.contactForm)
+
+//contact form submit post
+userRoute.post('/send-mail',userController.contactAdmin)
+
+
 
 
 

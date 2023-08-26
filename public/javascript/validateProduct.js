@@ -9,6 +9,7 @@ const sellingPriceInput = document.getElementById("sellingPriceInput")
 const actualPriceInput = document.getElementById("actualPriceInput")
 const stockInput = document.getElementById("stockInput")
 const productDescriptionInput = document.getElementById("productDescriptionInput")
+const productImage = document.getElementById("productImage")
 
 
 productForm.addEventListener("submit",function(event){
@@ -21,14 +22,14 @@ productForm.addEventListener("submit",function(event){
     const actualPrice = actualPriceInput.value
     const stock = stockInput.value
     const description = productDescriptionInput.value
-
-    event.preventDefault();
+    const image = productImage.files
 
     if(product.length < 3 || product == ""){
-        console.log(product,"dfgsdf");
+        event.preventDefault();
         productError.textContent = "Please enter a valid product name"
     }
     else if(category == "Select Category"){
+        event.preventDefault();
         productError.textContent = "Please select a category"
     }
     else if(brand == "Select Brand"){
@@ -58,6 +59,13 @@ productForm.addEventListener("submit",function(event){
     else if(description.length < 5 || description == ""){
         event.preventDefault();
         productError.textContent = "Please enter a valid product description"
+    }
+    else if(image.length === 0){
+        event.preventDefault();
+        productError.textContent = "Please select an product image for upload"
+    }
+    else{
+        productError.textContent= ""
     }
 
 })

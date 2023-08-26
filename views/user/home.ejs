@@ -58,7 +58,7 @@
                                 <div class="card m-3 product-card border-0 px-2 img-fluid position-relative">
                                     <a href="/product?id=<%= item._id %>">
                                     <div>
-                                        <img src="/images/<%= item.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
+                                        <img src="/images/<%= item?.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
                                     </div>
                                     <div class="card-body p-0">
                                         <h5 class="card-title fw-bold mt-1 mb-0"><%= item.brand %></h5>
