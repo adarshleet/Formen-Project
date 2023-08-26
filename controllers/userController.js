@@ -14,7 +14,7 @@ const node_pass = process.env.NODE_PASS
 const contact_mail = process.env.CONTACT_MAIL
 const client = require('twilio')(accountSID,authToken);
 const Category = require('../models/categoryModel');
-const nodemailer = require('nodemailer')
+// const nodemailer = require('nodemailer')
 
 
 
@@ -333,45 +333,45 @@ exports.contactForm = async (req,res,next) =>{
     }
 }
 
-exports.contactAdmin = async (req,res) =>{
-    try {
-        const {name,email,mobile,message} = req.body
-        console.log(name,email,mobile,message);
+// exports.contactAdmin = async (req,res) =>{
+//     try {
+//         const {name,email,mobile,message} = req.body
+//         console.log(name,email,mobile,message);
 
-        const contactMail = (name, email, message,mobile) => {
-            const mailTransporter = nodemailer.createTransport({
-              service: "gmail",
-              auth: {
-                user: "adarshravi0111@gmail.com",
-                pass: node_pass,
-              },
-            });
+//         const contactMail = (name, email, message,mobile) => {
+//             const mailTransporter = nodemailer.createTransport({
+//               service: "gmail",
+//               auth: {
+//                 user: "adarshravi0111@gmail.com",
+//                 pass: node_pass,
+//               },
+//             });
           
           
-            const mailOptions = {
-              from: "adarshravi0111@gmail.com",
-              to: contact_mail,
-              subject: "Formen Contact",
-              text: `Name : ${name} \nEmail : ${email} \nMobile : ${mobile}.\nMessage : ${message}`,
-            };
+//             const mailOptions = {
+//               from: "adarshravi0111@gmail.com",
+//               to: contact_mail,
+//               subject: "Formen Contact",
+//               text: `Name : ${name} \nEmail : ${email} \nMobile : ${mobile}.\nMessage : ${message}`,
+//             };
           
-            mailTransporter.sendMail(mailOptions, (err) => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log("Message sent successfully");
-                req.app.locals.specialContext = 'Message Sent Successfully';
-                res.redirect('/contact-us')
-              }
-            });
-          };
+//             mailTransporter.sendMail(mailOptions, (err) => {
+//               if (err) {
+//                 console.log(err);
+//               } else {
+//                 console.log("Message sent successfully");
+//                 req.app.locals.specialContext = 'Message Sent Successfully';
+//                 res.redirect('/contact-us')
+//               }
+//             });
+//           };
 
-          contactMail(name,email,message,mobile)
+//           contactMail(name,email,message,mobile)
 
-    } catch (error) {
-        console.log(error.message);
-    }
-}
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
 
 
 //USER PROFILE

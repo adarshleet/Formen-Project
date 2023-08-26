@@ -47,7 +47,7 @@ userRoute.get('/product',productController.singleProduct);
 userRoute.get('/contact-us',userController.contactForm)
 
 //contact form submit post
-userRoute.post('/send-mail',userController.contactAdmin)
+// userRoute.post('/send-mail',userController.contactAdmin)
 
 
 
