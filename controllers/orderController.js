@@ -167,6 +167,10 @@ exports.paymentDone = async (req,res) =>{
                             walletAmountForOne = walletAmount
                             walletAmount = 0
                         }
+                        else{
+                            walletAmountForOne = 0
+                            walletAmount = 0
+                        }
                    }
 
                     let order =  {  product : cart.product[i].product_id,
@@ -217,14 +221,19 @@ exports.paymentDone = async (req,res) =>{
             }
             else if(method.payment === 'online'){
                 let orderArray=[]
-
+                console.log(walletAmount);
+                for(let i=0;i<cart.product.length;i++){
                 if(walletAmount>0){
-                    walletAmount = walletAmount - (cart.product[i].price * cart.product[i].count)-discountForOne
+                    console.log("herealso",walletAmount);
+                    console.log("herealso",walletAmount);
                     if(walletAmount > (cart.product[i].price * cart.product[i].count)-discountForOne){
                         walletAmountForOne = (cart.product[i].price * cart.product[i].count)-discountForOne
+                        walletAmount = walletAmount - (cart.product[i].price * cart.product[i].count)-discountForOne
+                        console.log(walletAmountForOne);
                     }
                     else if(walletAmount < (cart.product[i].price * cart.product[i].count)-discountForOne && walletAmount >=0){
                         walletAmountForOne = walletAmount
+                        console.log(walletAmountForOne);
                         walletAmount = 0
                     }
                     else{
@@ -232,8 +241,6 @@ exports.paymentDone = async (req,res) =>{
                         walletAmount = 0
                     }
                }
-
-                for(let i=0;i<cart.product.length;i++){
                     let order =  {  product : cart.product[i].product_id,
                                     count: cart.product[i].count,
                                     size: cart.product[i].size,
