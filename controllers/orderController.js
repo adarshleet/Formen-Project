@@ -231,11 +231,11 @@ exports.paymentDone = async (req,res) =>{
                     else if(walletAmount < (cart.product[i].price * cart.product[i].count)-discountForOne && walletAmount >=0){
                         walletAmountForOne = walletAmount
                         console.log(walletAmountForOne);
-                        walletAmount = 0
+                        walletAmount = 0;
                     }
                     else{
-                        walletAmountForOne = 0
-                        walletAmount = 0
+                        walletAmountForOne = 0;
+                        walletAmount = 0;
                     }
                 }
                     let order =  {  product : cart.product[i].product_id,
