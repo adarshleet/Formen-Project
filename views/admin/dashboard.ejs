@@ -220,18 +220,18 @@
                     </div>
                     <div class="mt-3 p-2 sales-report">
                         <h6 class="fw-bold">SALES REPORT</h6>
-                        <form class="px-3" action="/admin/dashboard/sales-report" method="post">
+                        <form class="px-3" action="/admin/dashboard/sales-report" id="salesReportForm" method="post">
                             <div class="d-flex justify-content-around mb-2">
                                 <div>
                                     <h6 class="mb-0">Start Date</h6>
-                                    <input type="date" name="startDate" class="form-control">
+                                    <input type="date" name="startDate" id="startDate" class="form-control">
                                 </div>
                                 <div>
                                     <h6 class="mb-0">End Date</h6>
-                                    <input type="date" name="endDate" class="form-control">
+                                    <input type="date" name="endDate" id="endDate" class="form-control">
                                 </div>
                             </div>
-
+                            <div id="error-msg" class="text-danger text-center"></div>
                             <button class="btn btn-secondary w-100 fw-bold mb-1" type="submit">FILTER SALES REPORT</button>
                         </form>
                         <form class="px-3" action="/admin/dashboard/sales-report" method="post">
@@ -244,4 +244,5 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="/javascript/dashboardBars.js"></script>
+    <script src="/javascript/salesReport.js"></script>
 <%- include('./foot.ejs') %>

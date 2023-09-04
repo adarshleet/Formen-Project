@@ -221,11 +221,8 @@ exports.paymentDone = async (req,res) =>{
             }
             else if(method.payment === 'online'){
                 let orderArray=[]
-                console.log(walletAmount);
                 for(let i=0;i<cart.product.length;i++){
                 if(walletAmount>0){
-                    console.log("herealso",walletAmount);
-                    console.log("herealso",walletAmount);
                     if(walletAmount > (cart.product[i].price * cart.product[i].count)-discountForOne){
                         walletAmountForOne = (cart.product[i].price * cart.product[i].count)-discountForOne
                         walletAmount = walletAmount - (cart.product[i].price * cart.product[i].count)-discountForOne
@@ -240,7 +237,7 @@ exports.paymentDone = async (req,res) =>{
                         walletAmountForOne = 0
                         walletAmount = 0
                     }
-               }
+                }
                     let order =  {  product : cart.product[i].product_id,
                                     count: cart.product[i].count,
                                     size: cart.product[i].size,
