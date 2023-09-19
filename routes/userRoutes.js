@@ -209,7 +209,7 @@ userRoute.post('/verifyPayment',orderController.verifyPayment);
 //404 error middlewares
 userRoute.use((err, req, res, next) => {
     console.log(err.message);
-    res.status(err.status || 404).render('user/404',{title:'Not Found'})
+    res.status(err.status || 404).render('user/404')
 })
 
 
