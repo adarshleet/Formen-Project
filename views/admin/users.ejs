@@ -35,7 +35,7 @@
                                 <tbody>
                                     <%for(let i=0;i<users.length;i++){%>
                                         <tr>
-                                            <td><%= (limit*currentPage)+i-1 %></td>
+                                            <td><%= (limit*parseInt(currentPage))+i-7 %></td>
                                             <td><%=users[i].name%></td>
                                             <td><%=users[i].mobile%></td>
                                             <td>

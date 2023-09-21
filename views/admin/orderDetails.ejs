@@ -22,9 +22,9 @@
                         <div style="width: 6.7rem;">
                             <img class="img-fluid" src="/images/<%= order.product.images[0].filename %>" alt="">
                         </div>
-                        <div class="ms-2" style="width: 25rem;">
+                        <div class="ms-2 single-order">
                             <h6> <%= order.product.brand %></h6>
-                            <p><%= order.product.name %><p>
+                            <p class="product-name"><%= order.product.name %><p>
                             <div class="d-flex my-2">
                                 <p class="me-2"><b>Size : <%= order.size %></b></p>
                                 <p><b>Quantity : <%= order.count %></b></p>

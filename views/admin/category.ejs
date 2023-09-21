@@ -25,57 +25,72 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <% category.forEach(item =>{%>
-                                    <tbody>
-                                        <tr class="text-center">
-                                            <td>
-                                                <%= category.indexOf(item)+1 %>
-                                            </td>
-                                            <td>
-                                                <%= item.category %>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-sm btn-primary edit-button"
-                                                    title="Edit" data-category="<%= item.category %>" data-cat-id="<%= item._id %>" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
-                                                <a href="/admin/hideCategory/<%= item._id %>" onclick="return confirm('Are you sure you want to hide/show this category?')" class="btn btn-sm btn-primary <%= item.showStatus ? 'btn-primary' : 'btn-danger' %> delete" title="Delete"><%= item.showStatus ? 'Hide' : 'Unhide' %></a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <%}) %>   
+                                    <% category.forEach(item=>{%>
+                                        <tbody>
+                                            <tr class="text-center">
+                                                <td>
+                                                    <%= category.indexOf(item)+1 %>
+                                                </td>
+                                                <td>
+                                                    <%= item.category %>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary edit-button" title="Edit"
+                                                        data-category="<%= item.category %>"
+                                                        data-cat-id="<%= item._id %>" type="button"
+                                                        class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#staticBackdrop">Edit</button>
+                                                    <a href="/admin/hideCategory/<%= item._id %>"
+                                                        onclick="return confirm('Are you sure you want to hide/show this category?')"
+                                                        class="btn btn-sm btn-primary <%= item.showStatus ? 'btn-primary' : 'btn-danger' %> delete"
+                                                        title="Delete">
+                                                        <%= item.showStatus ? 'Hide' : 'Unhide' %>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <%}) %>
                                 </table>
-                    
+
                                 <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Edit Category</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Edit Category</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/admin/editCategory" method="post"
+                                                    class="form-control p-3">
+                                                    <input type="text" id="inputField" name="category"
+                                                        class="w-100 my-2">
+                                                    <input type="text" id="inputFieldId" hidden name="categoryId"
+                                                        class="w-100 my-2">
+                                                    <button class="btn btn-secondary btn-sm w-100 my-2"
+                                                        type="submit">SAVE</button>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            <form action="/admin/editCategory" method="post" class="form-control p-3">
-                                                <input type="text" id="inputField" name="category" class="w-100 my-2">
-                                                <input type="text" id="inputFieldId" hidden name="categoryId" class="w-100 my-2">
-                                                <button class="btn btn-secondary btn-sm w-100 my-2" type="submit">SAVE</button>
-                                            </form>
-                                        </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <script>
             // Set the input value based on the clicked category
-            $('.edit-button').on('click', function() {
-            const category = $(this).data('category');
-            const id = $(this).data('catId')
-            $('#inputField').val(category);
-            $('#inputFieldId').val(id);
+            $('.edit-button').on('click', function () {
+                const category = $(this).data('category');
+                const id = $(this).data('catId')
+                $('#inputField').val(category);
+                $('#inputFieldId').val(id);
             });
         </script>
         <script src="/javascript/editProduct.js"></script>
