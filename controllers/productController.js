@@ -367,7 +367,7 @@ exports.allProducts = async (req,res,next) =>{
         const page = req.query.page || 1;
         const limit = 8
         const search = req.query.search || ""
-        let sort = req.query.sort || {name:1}
+        let sort = req.query.sort || {addedDate:1}
         let cat = req.query.category || 'all'
         let price = req.query.price
         brands = req.query.brand || 'all'
@@ -390,7 +390,7 @@ exports.allProducts = async (req,res,next) =>{
         }
         else if(price == 2501){
             minPrice = price
-            maxPrice = 0
+            maxPrice = 999999
         }
         else if(price == undefined){
             minPrice = 0
@@ -403,6 +403,7 @@ exports.allProducts = async (req,res,next) =>{
             }
             else{
                 maxPrice = Math.max(...price);
+                maxPrice == 2501 ? maxPrice = 99999 : maxPrice
                 minPrice = Math.min(...price) - 499;
             }
         }
@@ -415,7 +416,7 @@ exports.allProducts = async (req,res,next) =>{
         if(sort == 1){
             sort = {sellingPrice:1}
         }
-        else if( sort == -1){
+        else if(sort == -1){
             sort = {sellingPrice:-1}
         }
 
