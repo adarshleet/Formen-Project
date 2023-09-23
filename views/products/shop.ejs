@@ -14,7 +14,7 @@
             <div class="col-md-6 d-flex justify-content-end">
                 <div class="dropdown">
                     <a class="btn border border-secondary dropdown-toggle d-flex align-items-center" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                      Sort by: <% if(sortToFront == 1){%> <h6 class="fw-bold mx-1">Price - Low To High</h6> <%}else if(sortToFront == -1){%><h6 class="fw-bold mx-1">Price - High To Low </h6><%} %>
+                      Sorted by: <% if(sortToFront == 1){%> <h6 class="fw-bold mx-1">Price - Low To High</h6> <%}else if(sortToFront == -1){%><h6 class="fw-bold mx-1">Price - High To Low </h6><%}else{%><h6 class="fw-bold mx-1">Newest First</h6><%} %>
                     </a>
                     <ul class="dropdown-menu text-center w-100" aria-labelledby="dropdownMenuLink">
                       <li><h6 class="page-item my-2" data-do-sort="1"><a href="#">Price - Low To High </a></h6></li>
