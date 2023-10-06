@@ -23,7 +23,7 @@ function startCountdown(duration, display, resendButton,otpVerifyButton) {
     const countdownDisplay = document.getElementById("countdown");
     const resendButton = document.getElementById("resendButton");
     const otpVerifyButton = document.getElementById("otpVerifyButton");
-    const totalSeconds = 30;
+    const totalSeconds = 60;
 
     startCountdown(totalSeconds, countdownDisplay, resendButton,otpVerifyButton);
   };
