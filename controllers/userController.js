@@ -6,16 +6,13 @@ const Coupon = require('../models/couponModel');
 const Cart = require('../models/cartModel');
 const Banner = require('../models/bannerModel');
 const Product = require('../models/productModel');
+const Category = require('../models/categoryModel');
 const bcrypt = require('bcrypt');
-const accountSID = process.env.ACC_SID;
-const authToken = process.env.AUTH_TOKEN;
-const serviceID = process.env.SERVICE_ID;
 const node_pass = process.env.NODE_PASS
 const contact_mail = process.env.CONTACT_MAIL
-const client = require('twilio')(accountSID,authToken);
-const Category = require('../models/categoryModel');
 // const nodemailer = require('nodemailer')
-
+const {sendOTP,verifyOTP,resendOTP}= require('otpless-node-js-auth-sdk')
+const {sendOtp,verifyOtp,resendOtp} = require('../utils/OtpServices')
 
 
 
@@ -37,7 +34,7 @@ exports.userSignup =async (req,res,next) =>{
         req.app.locals.specialContext = null;
         res.render('user/userSignup',{context,category,referral,title:'Signup',cartItems});
     } catch (error) {
-        error(next)
+        next(error)
     }
 }
 
@@ -58,27 +55,16 @@ exports.signup = async (req,res) =>{
         }
 
         else{
-            client.verify.v2
-                .services(serviceID)
-                .verifications.create({
-                    to: `+91${mobile}`,
-                    channel: "sms",
-                })
+           
+            const response = await sendOtp(mobile)
+            req.session.orderIdOtp =  response.orderId
             req.session.otpPageForSignUp = true
             res.redirect(`/verifyOtp/?mobile=${mobile}`)
         }
         
     } 
     catch (error) {
-        if (error instanceof Twilio.RestClient.RestException) {
-            console.error("Twilio API Error:");
-            console.error("Status:", error.status);
-            console.error("Code:", error.code);
-            console.error("More Info:", error.moreInfo);
-            console.error("Details:", error.details);
-          } else {
-            console.error("An unexpected error occurred:", error);
-          }
+        console.error(error);
     }
 }
 
@@ -89,11 +75,10 @@ exports.otpVerfy = async (req,res) =>{
     try {
         const {mobile,otp} = req.body
 
-        const ver_check = await client.verify.v2
-        //Checking the otp is correct
-        .services(serviceID)
-        .verificationChecks.create({ to: `+91${mobile}`, code: otp });
-        if (ver_check.status === "approved") {
+        const orderId = req.session.orderIdOtp
+        const response = await verifyOtp(mobile,otp,orderId)
+
+        if (response.isOTPVerified) {
             const {name,mobile,password,referral} = details;
             // hash the password
             const hashedPassword = await bcrypt.hash(password,10);
@@ -188,12 +173,9 @@ exports.otpVerfy = async (req,res) =>{
 exports.resendOtp = async (req,res) =>{
     try {
         const mobile = details.mobile
-        client.verify.v2
-                .services(serviceID)
-                .verifications.create({
-                    to: `+91${mobile}`,
-                    channel: "sms",
-                })
+        const orderId = req.session.orderIdOtp
+        const response = await resendOtp(orderId)
+        console.log(response)
         res.redirect(`/verifyOtp/?mobile=${mobile}`)
     } catch (error) {
         console.log(error.message);
@@ -552,12 +534,8 @@ exports.mobileChange = async (req,res) =>{
                 res.json({status:'mobile'})
             }
             else{
-                client.verify.v2
-                .services(serviceID)
-                .verifications.create({
-                    to: `+91${mobile}`,
-                    channel: "sms",
-                })
+                const response = await sendOtp(mobile)
+                req.session.orderIdOtp =  response.orderId
                 req.session.otpPageForMobileChange = true
                 res.json({status:true,mobile})
             }
@@ -597,11 +575,9 @@ exports.mobileChangeConfirm = async (req,res) =>{
         const user_id = req.session.user_id
 
         const {otp} = req.body
-        const ver_check = await client.verify.v2
-        //Checking the otp is correct
-        .services(serviceID)
-        .verificationChecks.create({ to: `+91${mobile}`, code: otp });
-        if (ver_check.status === "approved") {
+        const orderId = req.session.orderIdOtp
+        const response = await verifyOtp(mobile,otp,orderId)
+        if (response.isOTPVerified) {
             //update mobile number
             await User.findByIdAndUpdate(user_id,{$set:{mobile}})
             res.redirect('/profile/edit')
@@ -621,12 +597,8 @@ exports.mobileChangeConfirm = async (req,res) =>{
 exports.otpResend = async (req,res) =>{
     try {
         let mobile = req.session.mobile
-        client.verify.v2
-                .services(serviceID)
-                .verifications.create({
-                    to: `+91${mobile}`,
-                    channel: "sms",
-                })
+        const orderId = req.session.orderIdOtp
+        const response = await resendOtp(orderId)
         res.redirect(`/otpVerify/?mobile=${mobile}`)
     } catch (error) {
         console.log(error.message);
@@ -663,12 +635,8 @@ exports.sendOtpForgotPassword = async (req,res) =>{
             res.json({status:'mobile'});
         }
         else{
-            client.verify.v2
-                .services(serviceID)
-                .verifications.create({
-                    to: `+91${mobile}`,
-                    channel: "sms",
-                })
+            const response = await sendOtp(mobile)
+            req.session.orderIdOtp =  response.orderId
             req.session.otpForForgotPassword = true
             res.json({status:true,mobile});
         }
@@ -700,12 +668,8 @@ exports.otpVerifyForPasswordReset = async (req,res,next) =>{
 exports.resendOtpForgotPass = async (req,res) =>{
     try {
         const mobile = req.session.mobile;
-        client.verify.v2
-                .services(serviceID)
-                .verifications.create({
-                    to: `+91${mobile}`,
-                    channel: "sms",
-                })
+        const orderId = req.session.orderIdOtp
+        const response = await resendOtp(orderId)
         res.redirect(`/otp_reset_password?mobile=${mobile}`);
     } catch (error) {
         console.log(error.message);
@@ -718,11 +682,9 @@ exports.otpVerifyForResetPass = async (req,res) =>{
     try {
         const mobile = req.session.mobile
         const {otp} = req.body
-        const ver_check = await client.verify.v2
-        //Checking the otp is correct
-        .services(serviceID)
-        .verificationChecks.create({ to: `+91${mobile}`, code: otp });
-        if (ver_check.status === "approved") {
+        const orderId = req.session.orderIdOtp
+        const response = await verifyOtp(mobile,otp,orderId)
+        if (response.isOTPVerified) {
             req.session.passwordReset = true
             res.redirect('/passwordReset')
         }

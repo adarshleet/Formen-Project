@@ -395,7 +395,7 @@ exports.cancelOrder = async(req,res) =>{
               'orders._id': order_id,
             },
             { 'orders.$': 1 }
-          ).populate('orders.product')
+        ).populate('orders.product')
         
         
         await Order.findOneAndUpdate({

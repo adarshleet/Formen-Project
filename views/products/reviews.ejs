@@ -1,113 +1,146 @@
 <%- include('./head.ejs') %>
-        <link rel="stylesheet" href="/css/header.css">
-        <link rel="stylesheet" href="/css/popUp.css">
-        <link rel="stylesheet" href="/css/rating.css">
-        <title>Document</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/popUp.css">
+    <link rel="stylesheet" href="/css/rating.css">
+    <title>Document</title>
     </head>
+
     <body>
         <%- include('./header.ejs') %>
-        <main class="container" style="min-height: 100vh;">
-            <%- include('sideBarSingle.ejs') %>
-            <div class="row container-fluid p-2">
-                <div class="col-md-3 p-2">
-                    <div class="card m-3 product-card border-0 px-2 img-fluid">
-                        <a href="/product?id=<%= product._id %>">
-                        <div>
-                            <img src="/images/<%= product.images[0].filename %>" class="card-img-top mt-2 img-fluid" alt="...">
-                        </div>
-                        <div class="card-body p-0">
-                            <h5 class="card-title fw-bold mt-1 mb-0"><%= product.brand %></h5>
-                            <p class="card-text product-name"><%= product.name %>.</p>
-                            <p> <b><span class="selling-price">Rs <%= product.sellingPrice %></span> </b> <s>Rs <%= product.actualPrice %>  </s> <span class="text-danger">(<%= Math.round(((product.actualPrice - product.sellingPrice) / product.actualPrice) * 100) %>%off)</span></p></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9 p-2">
-                    <div class="m-3 mb-0 mt-4 border-secondary border-bottom border-top ">
-                        <div class=" p-1">
-                            <h5 class="fw-bold">RATINGS <i class="fa fa-light fa-star"></i></h5>
-                        </div>
-                        <div class="d-flex">
-                            <div class="m-3 ms-5 d-flex flex-column justify-content-center" >
-                                <h1><%= averageRating %><i class="fa-solid fa-star" style="color: #a4a5a8;"></i></h1>
-                                <h5><%= numReviews %> Verified buyers</h5>
+            <main class="container" style="min-height: 100vh;">
+                <%- include('sideBarSingle.ejs') %>
+                    <div class="row container-fluid p-2">
+                        <div class="col-md-3 p-2">
+                            <div class="card m-3 product-card border-0 px-2 img-fluid">
+                                <a href="/product?id=<%= product._id %>">
+                                    <div>
+                                        <img src="/images/<%= product.images[0].filename %>"
+                                            class="card-img-top mt-2 img-fluid" alt="...">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <h5 class="card-title fw-bold mt-1 mb-0">
+                                            <%= product.brand %>
+                                        </h5>
+                                        <p class="card-text product-name">
+                                            <%= product.name %>.
+                                        </p>
+                                        <p> <b><span class="selling-price">Rs <%= product.sellingPrice %></span> </b>
+                                            <s>Rs <%= product.actualPrice %> </s> <span class="text-danger">(<%=
+                                                    Math.round(((product.actualPrice - product.sellingPrice) /
+                                                    product.actualPrice) * 100) %>%off)</span></p>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <% if(orders != undefined){%>
-                    <div class="mt-0 m-3 ">
-                        <div class=" p-1">
-                            <h6 class="fw-bold">Rate this product</i></h6>
+                    <div class="col-md-9 p-2">
+                        <div class="m-3 mb-0 mt-4 border-secondary border-bottom border-top ">
+                            <div class=" p-1">
+                                <h5 class="fw-bold">RATINGS <i class="fa fa-light fa-star"></i></h5>
+                            </div>
+                            <div class="d-flex">
+                                <div class="m-3 ms-5 d-flex flex-column justify-content-center">
+                                    <h1>
+                                        <%= averageRating %><i class="fa-solid fa-star" style="color: #a4a5a8;"></i>
+                                    </h1>
+                                    <h5>
+                                        <%= numReviews %> Verified buyers
+                                    </h5>
+                                </div>
+                            </div>
                         </div>
-                        <form id="ratingForm" action="/submit-rating/<%= product._id %>" method="POST">
-                            <div class="rating-box border-bottom border-secondary">
-                                <div class="stars">
-                                    <% if(reviewFound){%>
-                                    <% for(let i=1;i<=5;i++){%>
-                                    <i class="fa-solid fa-star <% if(reviewFound.reviews[0].rating >= i){%>active<%} %>" data-value="<%= i %>"></i>
-                                    <%}%>
+                        <% if(orders !=undefined){%>
+                            <div class="mt-0 m-3 ">
+                                <div class=" p-1">
+                                    <h6 class="fw-bold">Rate this product</i></h6>
                                 </div>
-                                <input type="hidden" id="selectedValue" name="selectedValue" value="">
-                                <div style="width: 20rem;">
-                                    <h6 class="fw-bold mt-2">Review this product</h6>
-                                    <input type="text" name="title" placeholder="Title" value="<%= reviewFound.reviews[0].title %>" class="w-100 mb-2">
-                                    <textarea class="w-100" name="description" placeholder="Description"  cols="30" rows="5" style="resize: none;"><%= reviewFound.reviews[0].review %></textarea>
-                                </div>
-                                <button class="btn btn-secondary fw-bold mb-2" type="submit">SUBMIT</button>
-                                <% }else{%>
-                                    <% for(let i=1;i<=5;i++){%>
-                                        <i class="fa-solid fa-star" data-value="<%= i %>"></i>
-                                        <%}%>
+                                <form id="ratingForm" action="/submit-rating/<%= product._id %>" method="POST">
+                                    <div class="rating-box border-bottom border-secondary">
+                                        <div class="stars">
+                                            <% if(reviewFound){%>
+                                                <% for(let i=1;i<=5;i++){%>
+                                                    <i class="fa-solid fa-star <% if(reviewFound.reviews[0].rating >= i){%>active<%} %>"
+                                                        data-value="<%= i %>"></i>
+                                                    <%}%>
+                                        </div>
+                                        <input type="hidden" id="selectedValue" name="selectedValue" value="">
+                                        <div style="width: 20rem;">
+                                            <h6 class="fw-bold mt-2">Review this product</h6>
+                                            <input type="text" name="title" placeholder="Title"
+                                                value="<%= reviewFound.reviews[0].title %>" class="w-100 mb-2">
+                                            <textarea class="w-100" name="description" placeholder="Description"
+                                                cols="30" rows="5"
+                                                style="resize: none;"><%= reviewFound.reviews[0].review %></textarea>
+                                        </div>
+                                        <button class="btn btn-secondary fw-bold mb-2" type="submit">SUBMIT</button>
+                                        <% }else{%>
+                                            <% for(let i=1;i<=5;i++){%>
+                                                <i class="fa-solid fa-star" data-value="<%= i %>"></i>
+                                                <%}%>
                                     </div>
                                     <input type="hidden" id="selectedValue" name="selectedValue" value="">
                                     <div style="width: 20rem;">
                                         <h6 class="fw-bold mt-2">Review this product</h6>
                                         <input type="text" name="title" placeholder="Title" value="" class="w-100 mb-2">
-                                        <textarea class="w-100" name="description" placeholder="Description"  cols="30" rows="5" style="resize: none;"></textarea>
+                                        <textarea class="w-100" name="description" placeholder="Description" cols="30"
+                                            rows="5" style="resize: none;"></textarea>
                                     </div>
                                     <button class="btn btn-secondary fw-bold mb-2" type="submit">SUBMIT</button>
-                                <%} %>
-                            </div>                                            
-                        </form>
+                                    <%} %>
+                            </div>
+                            </form>
                     </div>
                     <%}%>
-                    <div class="m-3 mt-0">
-                        <div class="mb-3">
-                            <h5 class="fw-bold">Customer reviews(<%if(reviews!=undefined){%><%=reviews.length%><%} %>)</h5>
+                        <div class="m-3 mt-0">
+                            <div class="mb-3">
+                                <h5 class="fw-bold">Customer reviews(<%if(reviews!=undefined){%>
+                                        <%=reviews.length%>
+                                            <%} %>)</h5>
+                            </div>
+                            <% if(reviews!=undefined){%>
+                                <% reviews.forEach(review=>{%>
+                                    <div class="my-2 border-bottom">
+                                        <div class="d-flex align-items-center">
+                                            <div class="fw-bold text-center rounded-1 me-2"
+                                                style="background-color: rgb(101, 98, 98); width: 2.3rem; color: #ffffff;font-size: .8rem;">
+                                                <p>
+                                                    <%= review.rating %> <i class="fa-sharp fa-solid fa-star"
+                                                            style="color: #ffffff;"></i>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p class="fw-bold">
+                                                    <%= review.title %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="my-2">
+                                            <p>
+                                                <%= review.review %>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex mb-2">
+                                            <p>
+                                                <%= review.user_id.name %>
+                                            </p>
+                                            <p class="mx-1">|</p>
+                                            <%const date=new Date(review.date);%>
+                                                <%const options={ month: 'short' , day: 'numeric' , year: 'numeric' };
+                                                    const formattedDate=date.toLocaleDateString('en-US', options); %>
+                                                    <p>
+                                                        <%= formattedDate %>
+                                                    </p>
+                                        </div>
+                                    </div>
+                                    <%}) %>
+                                        <%} %>
                         </div>
-                        <% if(reviews!= undefined){%>
-                        <% reviews.forEach(review =>{%>
-                        <div class="my-2 border-bottom">
-                            <div class="d-flex align-items-center">
-                                <div class="fw-bold text-center rounded-1 me-2" style="background-color: rgb(101, 98, 98); width: 2.3rem; color: #ffffff;font-size: .8rem;">
-                                    <p><%= review.rating %> <i class="fa-sharp fa-solid fa-star" style="color: #ffffff;"></i></p>
-                                </div>
-                                <div>
-                                    <p class="fw-bold"><%= review.title %></p>
-                                </div>
-                            </div>
-                            <div class="my-2">
-                                <p><%= review.review %></p>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <p><%= review.user_id.name %></p>
-                                <p class="mx-1">|</p>
-                                <%const date = new Date(review.date);%>
-                                <%const options = { month: 'short', day: 'numeric', year: 'numeric' };
-                                const formattedDate = date.toLocaleDateString('en-US', options); %>
-                                <p><%= formattedDate %></p>
-                            </div>
                         </div>
-                        <%}) %>
-                        <%} %>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <%- include('./footer.ejs') %>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="/javascript/slider.js"></script>
-        <script src="/javascript/header.js"></script>
-        <script src="/javascript/rating.js"></script>
+                        </div>
+            </main>
+            <%- include('./footer.ejs') %>
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script src="/javascript/slider.js"></script>
+                <script src="/javascript/header.js"></script>
+                <script src="/javascript/rating.js"></script>
 
-<%- include('./foot.ejs') %>
+                <%- include('./foot.ejs') %>
