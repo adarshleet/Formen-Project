@@ -76,6 +76,7 @@ exports.otpVerfy = async (req,res) =>{
         const {mobile,otp} = req.body
 
         const orderId = req.session.orderIdOtp
+       
         const response = await verifyOtp(mobile,otp,orderId)
 
         if (response.isOTPVerified) {

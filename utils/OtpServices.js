@@ -2,6 +2,8 @@ const { sendOTP, verifyOTP, resendOTP } = require('otpless-node-js-auth-sdk')
 
 
 exports.sendOtp = async (mobile) => {
+    console.log('env check',process.env.OTP_CLIENT_ID,
+    process.env.OTP_CLIENT_SECRET)
     const response = await sendOTP(`+91${mobile}`,
         null, null, null, null, null, null,
         process.env.OTP_CLIENT_ID,
